@@ -6,19 +6,19 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace asp_presentacion.Pages.Ventanas
 {
-    public class ProductosModel : PageModel
+    public class MascotasModel : PageModel
     {
-        private IProductosPresentacion? iPresentacion = null;
-        private IDistribuidoresPresentacion? iDistribuidoresPresentacion = null;
+        private IMascotasPresentacion? iPresentacion = null;
+        private IRazasPresentacion? IRazasPresentacion = null;
 
-        public ProductosModel(IProductosPresentacion iPresentacion,
-            IDistribuidoresPresentacion iDistribuidoresPresentacion)
+        public MascotasModel(IMascotasPresentacion iPresentacion,
+            IRazasPresentacion IRazasPresentacion)
         {
             try
             {
                 this.iPresentacion = iPresentacion;
-                this.iDistribuidoresPresentacion = iDistribuidoresPresentacion;
-                Filtro = new Productos();
+                this.IRazasPresentacion = IRazasPresentacion;
+                Filtro = new Mascotas();
             }
             catch (Exception ex)
             {
@@ -28,10 +28,10 @@ namespace asp_presentacion.Pages.Ventanas
 
         public IFormFile? FormFile { get; set; }
         [BindProperty] public Enumerables.Ventanas Accion { get; set; }
-        [BindProperty] public Productos? Actual { get; set; }
-        [BindProperty] public Productos? Filtro { get; set; }
-        [BindProperty] public List<Productos>? Lista { get; set; }
-        [BindProperty] public List<Distribuidores>? Distribuidores { get; set; }
+        [BindProperty] public Mascotas? Actual { get; set; }
+        [BindProperty] public Mascotas? Filtro { get; set; }
+        [BindProperty] public List<Mascotas>? Lista { get; set; }
+        [BindProperty] public List<Razas>? Razas { get; set; }
 
         public virtual void OnGet() { OnPostBtRefrescar(); }
 
@@ -46,7 +46,7 @@ namespace asp_presentacion.Pages.Ventanas
                     return;
                 }
 
-                Filtro!.Codigo = Filtro!.Codigo ?? "";
+                Filtro!.Nombre = Filtro!.Nombre ?? "";
 
                 Accion = Enumerables.Ventanas.Listas;
 
@@ -65,9 +65,9 @@ namespace asp_presentacion.Pages.Ventanas
         {
             try
             {
-                var task = this.iDistribuidoresPresentacion!.Listar();
+                var task = this.IRazasPresentacion!.Listar();
                 task.Wait();
-                Distribuidores = task.Result;
+                Razas = task.Result;
             }
             catch (Exception ex)
             {
@@ -80,7 +80,7 @@ namespace asp_presentacion.Pages.Ventanas
             try
             {
                 Accion = Enumerables.Ventanas.Editar;
-                Actual = new Productos();
+                Actual = new Mascotas();
                 CargarCombox();
             }
             catch (Exception ex)
@@ -110,7 +110,7 @@ namespace asp_presentacion.Pages.Ventanas
             {
                 Accion = Enumerables.Ventanas.Editar;
 
-                Task<Productos>? task = null;
+                Task<Mascotas>? task = null;
                 if (Actual!.Id == 0)
                     task = this.iPresentacion!.Guardar(Actual!)!;
                 else

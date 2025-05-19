@@ -1,24 +1,30 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using lib_dominio.Entidades;
 using lib_dominio.Nucleo;
 using lib_presentaciones.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
+//[ForeignKey("Mascota")] public Mascotas? _Mascota { get; set; }
+//[ForeignKey("Cliente")] public Clientes? _Cliente { get; set; }
+//[ForeignKey("Formula")] public Formulas? _Formula { get; set; }
+//[ForeignKey("Veterinario")] public Veterinarios? _Veterinario { get; set; }
+
 namespace asp_presentacion.Pages.Ventanas
 {
-    public class ProductosModel : PageModel
+    public class Historiales_ClinicosModel : PageModel
     {
-        private IProductosPresentacion? iPresentacion = null;
+        private IHistoriales_ClinicosPresentacion? iPresentacion = null;
         private IDistribuidoresPresentacion? iDistribuidoresPresentacion = null;
 
-        public ProductosModel(IProductosPresentacion iPresentacion,
+        public Historiales_ClinicosModel(IHistoriales_ClinicosPresentacion iPresentacion,
             IDistribuidoresPresentacion iDistribuidoresPresentacion)
         {
             try
             {
                 this.iPresentacion = iPresentacion;
                 this.iDistribuidoresPresentacion = iDistribuidoresPresentacion;
-                Filtro = new Productos();
+                Filtro = new Historiales_Clinicos();
             }
             catch (Exception ex)
             {
@@ -28,9 +34,9 @@ namespace asp_presentacion.Pages.Ventanas
 
         public IFormFile? FormFile { get; set; }
         [BindProperty] public Enumerables.Ventanas Accion { get; set; }
-        [BindProperty] public Productos? Actual { get; set; }
-        [BindProperty] public Productos? Filtro { get; set; }
-        [BindProperty] public List<Productos>? Lista { get; set; }
+        [BindProperty] public Historiales_Clinicos? Actual { get; set; }
+        [BindProperty] public Historiales_Clinicos? Filtro { get; set; }
+        [BindProperty] public List<Historiales_Clinicos>? Lista { get; set; }
         [BindProperty] public List<Distribuidores>? Distribuidores { get; set; }
 
         public virtual void OnGet() { OnPostBtRefrescar(); }
@@ -80,7 +86,7 @@ namespace asp_presentacion.Pages.Ventanas
             try
             {
                 Accion = Enumerables.Ventanas.Editar;
-                Actual = new Productos();
+                Actual = new Historiales_Clinicos();
                 CargarCombox();
             }
             catch (Exception ex)
@@ -110,7 +116,7 @@ namespace asp_presentacion.Pages.Ventanas
             {
                 Accion = Enumerables.Ventanas.Editar;
 
-                Task<Productos>? task = null;
+                Task<Historiales_Clinicos>? task = null;
                 if (Actual!.Id == 0)
                     task = this.iPresentacion!.Guardar(Actual!)!;
                 else

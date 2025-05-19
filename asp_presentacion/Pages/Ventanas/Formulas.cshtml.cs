@@ -9,10 +9,10 @@ namespace asp_presentacion.Pages.Ventanas
     public class FormulasModel : PageModel
     {
         private IFormulasPresentacion? iPresentacion = null;
-        private IDistribuidoresPresentacion? iDistribuidoresPresentacion = null;
+        private IMascotasPresentacion? iDistribuidoresPresentacion = null;
 
         public FormulasModel(IFormulasPresentacion iPresentacion,
-            IDistribuidoresPresentacion iDistribuidoresPresentacion)
+            IMascotasPresentacion iDistribuidoresPresentacion)
         {
             try
             {
@@ -31,7 +31,7 @@ namespace asp_presentacion.Pages.Ventanas
         [BindProperty] public Formulas? Actual { get; set; }
         [BindProperty] public Formulas? Filtro { get; set; }
         [BindProperty] public List<Formulas>? Lista { get; set; }
-        [BindProperty] public List<Distribuidores>? Distribuidores { get; set; }
+        [BindProperty] public List<Mascotas>? Mascotas { get; set; }
 
         public virtual void OnGet() { OnPostBtRefrescar(); }
 
@@ -67,7 +67,7 @@ namespace asp_presentacion.Pages.Ventanas
             {
                 var task = this.iDistribuidoresPresentacion!.Listar();
                 task.Wait();
-                Distribuidores = task.Result;
+                Mascotas = task.Result;
             }
             catch (Exception ex)
             {

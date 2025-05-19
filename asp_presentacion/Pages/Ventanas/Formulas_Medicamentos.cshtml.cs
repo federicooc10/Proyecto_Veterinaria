@@ -6,19 +6,22 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace asp_presentacion.Pages.Ventanas
 {
-    public class ProductosModel : PageModel
+    public class Formulas_MedicamentosModel : PageModel
     {
-        private IProductosPresentacion? iPresentacion = null;
-        private IDistribuidoresPresentacion? iDistribuidoresPresentacion = null;
+        private IFormulas_MedicamentosPresentacion? iPresentacion = null;
+        private IFormulasPresentacion? IFormulasPresentacion = null;
+        private IMedicamentosPresentacion? IMedicamentosPresentacion = null;
 
-        public ProductosModel(IProductosPresentacion iPresentacion,
-            IDistribuidoresPresentacion iDistribuidoresPresentacion)
+        public Formulas_MedicamentosModel(IFormulas_MedicamentosPresentacion iPresentacion,
+            IFormulasPresentacion IFormulasPresentacion, 
+            IMedicamentosPresentacion IMedicamentosPresentacion)
         {
             try
             {
                 this.iPresentacion = iPresentacion;
-                this.iDistribuidoresPresentacion = iDistribuidoresPresentacion;
-                Filtro = new Productos();
+                this.IFormulasPresentacion = IFormulasPresentacion;
+                this.IMedicamentosPresentacion = IMedicamentosPresentacion;
+                Filtro = new Formulas_Medicamentos();
             }
             catch (Exception ex)
             {
@@ -28,10 +31,11 @@ namespace asp_presentacion.Pages.Ventanas
 
         public IFormFile? FormFile { get; set; }
         [BindProperty] public Enumerables.Ventanas Accion { get; set; }
-        [BindProperty] public Productos? Actual { get; set; }
-        [BindProperty] public Productos? Filtro { get; set; }
-        [BindProperty] public List<Productos>? Lista { get; set; }
-        [BindProperty] public List<Distribuidores>? Distribuidores { get; set; }
+        [BindProperty] public Formulas_Medicamentos? Actual { get; set; }
+        [BindProperty] public Formulas_Medicamentos? Filtro { get; set; }
+        [BindProperty] public List<Formulas_Medicamentos>? Lista { get; set; }
+        [BindProperty] public List<Formulas>? Formulas { get; set; }
+        [BindProperty] public List<Medicamentos>? Medicamentos { get; set; }
 
         public virtual void OnGet() { OnPostBtRefrescar(); }
 
@@ -46,7 +50,7 @@ namespace asp_presentacion.Pages.Ventanas
                     return;
                 }
 
-                Filtro!.Codigo = Filtro!.Codigo ?? "";
+                Filtro!.Id = Filtro!.Id;
 
                 Accion = Enumerables.Ventanas.Listas;
 
@@ -65,9 +69,13 @@ namespace asp_presentacion.Pages.Ventanas
         {
             try
             {
-                var task = this.iDistribuidoresPresentacion!.Listar();
+                var task = this.IFormulasPresentacion!.Listar();
                 task.Wait();
-                Distribuidores = task.Result;
+                Formulas = task.Result;
+
+                var task2 = this.IMedicamentosPresentacion!.Listar();
+                task2.Wait();
+                Medicamentos = task2.Result;
             }
             catch (Exception ex)
             {
@@ -80,7 +88,7 @@ namespace asp_presentacion.Pages.Ventanas
             try
             {
                 Accion = Enumerables.Ventanas.Editar;
-                Actual = new Productos();
+                Actual = new Formulas_Medicamentos();
                 CargarCombox();
             }
             catch (Exception ex)
@@ -110,7 +118,7 @@ namespace asp_presentacion.Pages.Ventanas
             {
                 Accion = Enumerables.Ventanas.Editar;
 
-                Task<Productos>? task = null;
+                Task<Formulas_Medicamentos>? task = null;
                 if (Actual!.Id == 0)
                     task = this.iPresentacion!.Guardar(Actual!)!;
                 else
