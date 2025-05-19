@@ -54,7 +54,7 @@ namespace lib_aplicaciones.Implementaciones
             return this.IConexion!.Razas!.Take(20).ToList();
         }
 
-        public List<Razas> PorCodigo(Razas? entidad)
+        public List<Razas> PorNombre(Razas? entidad)
         {
             return this.IConexion!.Razas!
                 .Where(x => x.Nombre!.Contains(entidad!.Nombre!))

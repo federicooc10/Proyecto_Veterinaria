@@ -11,7 +11,7 @@ namespace lib_presentaciones
 
         public Comunicaciones(string servicio = "",
             string protocolo = "http://", 
-            string host = "localhost:5298")
+            string host = "localhost:5231")
         {
             Protocolo = protocolo;
             Host = host;

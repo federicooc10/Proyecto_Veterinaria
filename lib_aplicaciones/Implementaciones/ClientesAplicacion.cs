@@ -54,7 +54,7 @@ namespace lib_aplicaciones.Implementaciones
             return this.IConexion!.Clientes!.Take(20).ToList();
         }
 
-        public List<Clientes> PorCodigo(Clientes? entidad)
+        public List<Clientes> PorNombre(Clientes? entidad)
         {
             return this.IConexion!.Clientes!
                 .Where(x => x.Nombre!.Contains(entidad!.Nombre!))

@@ -57,7 +57,7 @@ namespace lib_aplicaciones.Implementaciones
                 .ToList();
         }
 
-        public List<Mascotas> PorCodigo(Mascotas? entidad)
+        public List<Mascotas> PorNombre(Mascotas? entidad)
         {
             return this.IConexion!.Mascotas!
                 .Where(x => x.Nombre!.Contains(entidad!.Nombre!))

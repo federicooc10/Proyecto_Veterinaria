@@ -54,7 +54,7 @@ namespace lib_aplicaciones.Implementaciones
             return this.IConexion!.Medicamentos!.Take(20).ToList();
         }
 
-        public List<Medicamentos> PorCodigo(Medicamentos? entidad)
+        public List<Medicamentos> PorNombre(Medicamentos? entidad)
         {
             return this.IConexion!.Medicamentos!
                 .Where(x => x.Nombre!.Contains(entidad!.Nombre!))

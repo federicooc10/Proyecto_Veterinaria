@@ -58,7 +58,7 @@ namespace lib_aplicaciones.Implementaciones
                 .ToList();
         }
 
-        public List<Formulas_Medicamentos> PorCodigo(Formulas_Medicamentos? entidad)
+        public List<Formulas_Medicamentos> PorId(Formulas_Medicamentos? entidad)
         {
             return this.IConexion!.Formulas_Medicamentos!
                 .Where(x => x.Id! == entidad!.Id!)

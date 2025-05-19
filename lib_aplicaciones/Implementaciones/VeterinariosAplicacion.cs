@@ -54,7 +54,7 @@ namespace lib_aplicaciones.Implementaciones
             return this.IConexion!.Veterinarios!.Take(20).ToList();
         }
 
-        public List<Veterinarios> PorCodigo(Veterinarios? entidad)
+        public List<Veterinarios> PorNombre(Veterinarios? entidad)
         {
             return this.IConexion!.Veterinarios!
                 .Where(x => x.Nombre!.Contains(entidad!.Nombre!))
