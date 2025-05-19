@@ -5,25 +5,29 @@ using lib_presentaciones.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-//[ForeignKey("Mascota")] public Mascotas? _Mascota { get; set; }
-//[ForeignKey("Cliente")] public Clientes? _Cliente { get; set; }
-//[ForeignKey("Formula")] public Formulas? _Formula { get; set; }
-//[ForeignKey("Veterinario")] public Veterinarios? _Veterinario { get; set; }
-
 namespace asp_presentacion.Pages.Ventanas
 {
     public class Historiales_ClinicosModel : PageModel
     {
         private IHistoriales_ClinicosPresentacion? iPresentacion = null;
-        private IDistribuidoresPresentacion? iDistribuidoresPresentacion = null;
+        private IMascotasPresentacion? IMascotasPresentacion = null;
+        private IClientesPresentacion? IClientesPresentacion = null;
+        private IFormulasPresentacion? IFormulasPresentacion = null;
+        private IVeterinariosPresentacion? IVeterinariosPresentacion = null;
 
         public Historiales_ClinicosModel(IHistoriales_ClinicosPresentacion iPresentacion,
-            IDistribuidoresPresentacion iDistribuidoresPresentacion)
+            IMascotasPresentacion IMascotasPresentacion,
+            IClientesPresentacion IClientesPresentacion,
+            IFormulasPresentacion IFormulasPresentacion,
+            IVeterinariosPresentacion IVeterinariosPresentacion)
         {
             try
             {
                 this.iPresentacion = iPresentacion;
-                this.iDistribuidoresPresentacion = iDistribuidoresPresentacion;
+                this.IMascotasPresentacion = IMascotasPresentacion;
+                this.IClientesPresentacion = IClientesPresentacion;
+                this.IFormulasPresentacion = IFormulasPresentacion;
+                this.IVeterinariosPresentacion = IVeterinariosPresentacion;
                 Filtro = new Historiales_Clinicos();
             }
             catch (Exception ex)
@@ -37,7 +41,10 @@ namespace asp_presentacion.Pages.Ventanas
         [BindProperty] public Historiales_Clinicos? Actual { get; set; }
         [BindProperty] public Historiales_Clinicos? Filtro { get; set; }
         [BindProperty] public List<Historiales_Clinicos>? Lista { get; set; }
-        [BindProperty] public List<Distribuidores>? Distribuidores { get; set; }
+        [BindProperty] public List<Mascotas>? Mascotas { get; set; }
+        [BindProperty] public List<Clientes>? Clientes { get; set; }
+        [BindProperty] public List<Formulas>? Formulas { get; set; }
+        [BindProperty] public List<Veterinarios>? Veterinarios { get; set; }
 
         public virtual void OnGet() { OnPostBtRefrescar(); }
 
@@ -71,9 +78,22 @@ namespace asp_presentacion.Pages.Ventanas
         {
             try
             {
-                var task = this.iDistribuidoresPresentacion!.Listar();
+                var task = this.IMascotasPresentacion!.Listar();
                 task.Wait();
-                Distribuidores = task.Result;
+                Mascotas = task.Result;
+
+                var task1 = this.IClientesPresentacion!.Listar();
+                task1.Wait();
+                Clientes = task1.Result;
+
+                var task2 = this.IFormulasPresentacion!.Listar();
+                task2.Wait();
+                Formulas = task2.Result;
+
+                var task3 = this.IVeterinariosPresentacion!.Listar();
+                task3.Wait();
+                Veterinarios = task3.Result;
+
             }
             catch (Exception ex)
             {
