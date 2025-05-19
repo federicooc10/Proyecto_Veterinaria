@@ -26,7 +26,7 @@ namespace lib_presentaciones.Implementaciones
             return lista;
         }
 
-        public async Task<List<Formulas_Medicamentos>> PorCodigo(Formulas_Medicamentos? entidad)
+        public async Task<List<Formulas_Medicamentos>> PorId(Formulas_Medicamentos? entidad)
         {
             var lista = new List<Formulas_Medicamentos>();
             var datos = new Dictionary<string, object>();

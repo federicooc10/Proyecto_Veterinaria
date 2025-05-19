@@ -1,7 +1,7 @@
 ﻿@page
 @model asp_presentacion.Pages.Ventanas.RazasModel
 @{
-    ViewData["Titulo"] = "Distribuidores";
+    ViewData["Titulo"] = "Razas";
 }
 <center>
     <div>
@@ -45,31 +45,15 @@
             @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
             {
                 <input type="hidden"
-                   asp-for="@Model.Actual!.Codigo" />
-                <input type="hidden"
                    asp-for="@Model.Actual!.Nombre" />
-                <input type="hidden"
-                   asp-for="@Model.Actual!.Dirreccion" />
-                <input type="hidden"
-                   asp-for="@Model.Actual!.Telefono" />
             }
 
             @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Editar)
             {
                 <div class="containers_vn panel panel-default">
-                    <h3>Distribuidor</h3>
+                    <h3>Raza</h3>
 
                     <div>
-                        <div class="form-group">
-                            <label class="col-lg-4 control-label">
-                                Codigo
-                            </label>
-                            <div class="col-lg-6">
-                                <input id="nmCodigo"
-                                   class="cts_forms form-control"
-                                   asp-for="@Model.Actual!.Codigo" />
-                            </div>
-                        </div>
                         <div class="form-group">
                             <label class="col-lg-4 control-label">
                                 Nombre
@@ -78,26 +62,6 @@
                                 <input id="nmNombre"
                                    class="cts_forms form-control"
                                    asp-for="@Model.Actual!.Nombre" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-4 control-label">
-                                Telefono
-                            </label>
-                            <div class="col-lg-6">
-                                <input id="nmTelefono"
-                                   class="cts_forms form-control"
-                                   asp-for="@Model.Actual!.Telefono" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-4 control-label">
-                                Dirreccion
-                            </label>
-                            <div class="col-lg-6">
-                                <input id="nmDirreccion"
-                                   class="cts_forms form-control"
-                                   asp-for="@Model.Actual!.Dirreccion" />
                             </div>
                         </div>
                     </div>
@@ -124,7 +88,6 @@
                                 Desea borrar la entidad?
                             </h4>
                             <h6 align="left">
-                                @Model.Actual!.Codigo, 
                                 @Model.Actual!.Nombre
                             </h6>
                             <br />
@@ -145,26 +108,17 @@
             @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas ||
                  Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
             {
-                <input id="flCodigo"
+                <input id="flNombre"
                    class="cts_forms form-control"
-                   asp-for="@Model.Filtro!.Codigo"
-                   placeholder="Codigo" />
+                   asp-for="@Model.Filtro!.Nombre"
+                   placeholder="Nombre" />
                 <br />
 
                 <div class="containers_vn panel panel-default">
                     <table class="tb_data table table-striped table-bordered table-hover">
                         <tr>
                             <th>
-                                Codigo
-                            </th>
-                            <th>
                                 Nombre
-                            </th>
-                            <th class="cl_hidden">
-                                Telefono
-                            </th>
-                            <th class="cl_actions">
-                                Dirreccion
                             </th>
                             <th>
                                 Accion
@@ -176,16 +130,7 @@
                             {
                                 <tr>
                                     <td>
-                                        @elemento.Codigo
-                                    </td>
-                                    <td>
                                         @elemento.Nombre
-                                    </td>
-                                    <td class="cl_hidden">
-                                        @elemento.Telefono
-                                    </td>
-                                    <td class="cl_hidden">
-                                        @elemento.Dirreccion
                                     </td>
                                     <td>
                                         <input type="submit"

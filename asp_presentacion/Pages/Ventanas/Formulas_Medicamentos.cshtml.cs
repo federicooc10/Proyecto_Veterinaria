@@ -54,7 +54,7 @@ namespace asp_presentacion.Pages.Ventanas
 
                 Accion = Enumerables.Ventanas.Listas;
 
-                var task = this.iPresentacion!.PorCodigo(Filtro!);
+                var task = this.iPresentacion!.PorId(Filtro!);
                 task.Wait();
                 Lista = task.Result;
                 Actual = null;
