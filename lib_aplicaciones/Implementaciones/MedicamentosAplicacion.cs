@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace lib_aplicaciones.Implementaciones
 {
-    public class ProductosAplicacion : IProductosAplicacion
+    public class MedicamentosAplicacion : IMedicamentosAplicacion
     {
         private IConexion? IConexion = null;
 
-        public ProductosAplicacion(IConexion iConexion)
+        public MedicamentosAplicacion(IConexion iConexion)
         {
             this.IConexion = iConexion;
         }
@@ -19,7 +19,7 @@ namespace lib_aplicaciones.Implementaciones
             this.IConexion!.StringConexion = StringConexion;
         }
 
-        public Productos? Borrar(Productos? entidad)
+        public Medicamentos? Borrar(Medicamentos? entidad)
         {
             if (entidad == null)
                 throw new Exception("lbFaltaInformacion");
@@ -29,12 +29,12 @@ namespace lib_aplicaciones.Implementaciones
 
             // Calculos
 
-            this.IConexion!.Productos!.Remove(entidad);
+            this.IConexion!.Medicamentos!.Remove(entidad);
             this.IConexion.SaveChanges();
             return entidad;
         }
 
-        public Productos? Guardar(Productos? entidad)
+        public Medicamentos? Guardar(Medicamentos? entidad)
         {
             if (entidad == null)
                 throw new Exception("lbFaltaInformacion");
@@ -44,28 +44,24 @@ namespace lib_aplicaciones.Implementaciones
 
             // Calculos
 
-            this.IConexion!.Productos!.Add(entidad);
+            this.IConexion!.Medicamentos!.Add(entidad);
             this.IConexion.SaveChanges();
             return entidad;
         }
 
-        public List<Productos> Listar()
+        public List<Medicamentos> Listar()
         {
-            return this.IConexion!.Productos!
-                .Take(20)
-                .Include(x => x._Distribuidor)
+            return this.IConexion!.Medicamentos!.Take(20).ToList();
+        }
+
+        public List<Medicamentos> PorCodigo(Medicamentos? entidad)
+        {
+            return this.IConexion!.Medicamentos!
+                .Where(x => x.Nombre!.Contains(entidad!.Nombre!))
                 .ToList();
         }
 
-        public List<Productos> PorCodigo(Productos? entidad)
-        {
-            return this.IConexion!.Productos!
-                .Where(x => x.Codigo!.Contains(entidad!.Codigo!))
-                .Include(x => x._Distribuidor)
-                .ToList();
-        }
-
-        public Productos? Modificar(Productos? entidad)
+        public Medicamentos? Modificar(Medicamentos? entidad)
         {
             if (entidad == null)
                 throw new Exception("lbFaltaInformacion");
@@ -75,7 +71,7 @@ namespace lib_aplicaciones.Implementaciones
 
             // Calculos
 
-            var entry = this.IConexion!.Entry<Productos>(entidad);
+            var entry = this.IConexion!.Entry<Medicamentos>(entidad);
             entry.State = EntityState.Modified;
             this.IConexion.SaveChanges();
             return entidad;

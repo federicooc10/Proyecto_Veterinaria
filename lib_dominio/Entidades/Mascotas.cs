@@ -10,9 +10,7 @@ namespace lib_dominio.Entidades
         public int Id { get; set; }
         public string? Nombre { get; set; }
         public int Raza { get; set; }
-
-        [ForeignKey("Raza")]
-        public Razas? _Raza { get; set; }
+        [ForeignKey("Raza")] public Razas? _Raza { get; set; }
         public List<Formulas>? Formulas { get; set; }
     }
 }

@@ -17,9 +17,7 @@ namespace lib_dominio.Entidades
         public int Id { get; set; }
         public string? Codigo { get; set; }
         public int Mascota { get; set; }
-
-        [ForeignKey("Mascota")]
-        public Mascotas? _Mascota { get; set; }
+        [ForeignKey("Mascota")] public Mascotas? _Mascota { get; set; }
         public List<Formulas_Medicamentos>? Formulas_Medicamentos { get; set; }
         public List<Historiales_Clinicos>? Historiales_Clinicos { get; set; }
     }

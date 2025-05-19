@@ -11,10 +11,8 @@ namespace lib_dominio.Entidades
         public int Formula { get; set; }
         public int Medicamento { get; set; }
         public int Cantidad { get; set; }
-        [ForeignKey("Formula")]
-        public Formulas? _Formula { get; set; }
-        [ForeignKey("Medicamento")]
-        public Medicamentos? _Medicamento { get; set; }
+        [ForeignKey("Formula")] public Formulas? _Formula { get; set; }
+        [ForeignKey("Medicamento")] public Medicamentos? _Medicamento { get; set; }
 
     }
 }
