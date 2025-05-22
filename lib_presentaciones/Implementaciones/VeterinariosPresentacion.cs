@@ -26,14 +26,14 @@ namespace lib_presentaciones.Implementaciones
             return lista;
         }
 
-        public async Task<List<Veterinarios>> PorCodigo(Veterinarios? entidad)
+        public async Task<List<Veterinarios>> PorNombre(Veterinarios? entidad)
         {
             var lista = new List<Veterinarios>();
             var datos = new Dictionary<string, object>();
             datos["Entidad"] = entidad!;
 
             comunicaciones = new Comunicaciones();
-            datos = comunicaciones.ConstruirUrl(datos, "Veterinarios/PorCodigo");
+            datos = comunicaciones.ConstruirUrl(datos, "Veterinarios/PorNombre");
             var respuesta = await comunicaciones!.Ejecutar(datos);
 
             if (respuesta.ContainsKey("Error"))
