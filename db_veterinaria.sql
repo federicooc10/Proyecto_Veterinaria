@@ -75,7 +75,7 @@ CREATE TABLE [Mascotas] (
 INSERT INTO [Mascotas] ([Nombre], [Raza]) VALUES 
 	('Coco', 1),
 	('Funny', 2),
-	('Niño', 3),
+	('Niï¿½o', 3),
 	('Bruno', 4),
 	('Kira', 5),
 	('Thanos', 6)
