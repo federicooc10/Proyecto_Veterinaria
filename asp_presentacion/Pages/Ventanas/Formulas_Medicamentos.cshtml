@@ -45,17 +45,13 @@
             @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
             {
                 <input type="hidden"
-                       asp-for="@Model.Actual!.Codigo" />
+                       asp-for="@Model.Actual!.Id" />
                 <input type="hidden"
-                       asp-for="@Model.Actual!.Nombre" />
+                       asp-for="@Model.Actual!.Formula" />
                 <input type="hidden"
-                       asp-for="@Model.Actual!.Lote" />
+                       asp-for="@Model.Actual!.Medicamento" />
                 <input type="hidden"
                        asp-for="@Model.Actual!.Cantidad" />
-                <input type="hidden"
-                       asp-for="@Model.Actual!.Precio" />
-                <input type="hidden"
-                       asp-for="@Model.Actual!.Distribuidor" />
             }
 
             @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Editar)
@@ -66,64 +62,46 @@
                     <div>
                         <div class="form-group">
                             <label class="col-lg-4 control-label">
-                                Codigo
+                                id
                             </label>
                             <div class="col-lg-6">
-                                <input id="nmCodigo"
+                                <input id="nmId"
                                        class="cts_forms form-control"
-                                       asp-for="@Model.Actual!.Codigo" />
+                                       asp-for="@Model.Actual!.Id" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-4 control-label">
-                                Nombre
+                                Formula
                             </label>
                             <div class="col-lg-6">
-                                <input id="nmNombre"
-                                       class="cts_forms form-control"
-                                       asp-for="@Model.Actual!.Nombre" />
+                                <select id="nmFormula"
+                                        class="form-control"
+                                        asp-for="@Model.Actual!.Formula"
+                                        asp-items="@(new SelectList(Model.Formulas, "Id", "Nombre"))">
+                                </select>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-4 control-label">
-                                Lote
-                            </label>
-                            <div class="col-lg-6">
-                                <input id="nmLote"
-                                       class="cts_forms form-control"
-                                       asp-for="@Model.Actual!.Lote" />
                             </div>
-                        </div>
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">
+                                    Medicamento
+                                </label>
+                                <div class="col-lg-6">
+                                    <select id="nmMedicamento"
+                                            class="form-control"
+                                            asp-for="@Model.Actual!.Medicamento"
+                                            asp-items="@(new SelectList(Model.Medicamentos, "Id", "Nombre"))">
+                                    </select>
+                                </div>
+                                </div>
                         <div class="form-group">
                             <label class="col-lg-4 control-label">
                                 Cantidad
                             </label>
                             <div class="col-lg-6">
-                                <input id="nmDirreccion"
+                                <input id="nmCantidad"
                                        class="cts_forms form-control"
                                        asp-for="@Model.Actual!.Cantidad" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-4 control-label">
-                                Precio
-                            </label>
-                            <div class="col-lg-6">
-                                <input id="nmDirreccion"
-                                       class="cts_forms form-control"
-                                       asp-for="@Model.Actual!.Precio" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-4 control-label">
-                                Distribuidor
-                            </label>
-                            <div class="col-lg-6">
-                                <select id="nmDistribuidor"
-                                    class="form-control"
-                                        asp-for="@Model.Actual!.Distribuidor"
-                                    asp-items="@(new SelectList(Model.Distribuidores, "Id", "Nombre"))">
-                                </select>
                             </div>
                         </div>
                     </div>
@@ -151,8 +129,7 @@
                                 Desea borrar la entidad?
                             </h4>
                             <h6 align="left">
-                                @Model.Actual!.Codigo,
-                                @Model.Actual!.Nombre
+                                @Model.Actual!.Id
                             </h6>
                             <br />
                             <br />
@@ -174,7 +151,7 @@
             {
                 <input id="flCodigo"
                        class="cts_forms form-control"
-                       asp-for="@Model.Filtro!.Codigo"
+                       asp-for="@Model.Filtro!.Id"
                        placeholder="Codigo" />
                 <br />
 
@@ -209,22 +186,16 @@
                             {
                                 <tr>
                                     <td>
-                                        @elemento.Codigo
-                                    </td>
-                                    <td>
-                                        @elemento.Nombre
+                                        @elemento.Id
                                     </td>
                                     <td class="cl_hidden">
-                                        @elemento.Lote
+                                        @elemento._Formula!.Codigo
+                                    </td>
+                                    <td class="cl_hidden">
+                                        @elemento._Medicamento!.Nombre
                                     </td>
                                     <td class="cl_hidden">
                                         @elemento.Cantidad
-                                    </td>
-                                    <td class="cl_hidden">
-                                        @elemento.Precio
-                                    </td>
-                                    <td class="cl_hidden">
-                                        @elemento._Distribuidor!.Nombre
                                     </td>
                                     <td>
                                         <input type="submit"
