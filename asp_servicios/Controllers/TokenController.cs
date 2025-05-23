@@ -32,7 +32,7 @@ namespace asp_servicios.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        [Route("Token/Autenticar")]
+        [Route("Autenticar")]
         public string Autenticar()
         {
             var respuesta = new Dictionary<string, object>();

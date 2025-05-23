@@ -53,7 +53,7 @@ namespace lib_aplicaciones.Implementaciones
         {
             return this.IConexion!.Historiales_Clinicos!
                 .Take(20)
-                .Include(x => x._Mascota)
+               // .Include(x => x._Mascota)
                 .Include(x => x._Cliente)
                 .Include(x => x._Formula)
                 .Include(x => x._Veterinario)
@@ -63,7 +63,7 @@ namespace lib_aplicaciones.Implementaciones
         {
             return this.IConexion!.Historiales_Clinicos!
                 .Where(x => x.Codigo!.Contains(entidad!.Codigo!))
-                .Include(x => x._Mascota)
+             //   .Include(x => x._Mascota)
                 .Include(x => x._Cliente)
                 .Include(x => x._Formula)
                 .Include(x => x._Veterinario)

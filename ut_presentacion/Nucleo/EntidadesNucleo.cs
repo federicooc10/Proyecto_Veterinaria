@@ -37,7 +37,6 @@ namespace ut_presentacion.Nucleo
             {
                 Codigo = "Test-" + DateTime.Now.ToString("yyyyMMddhhmmss"),
                 Fecha = DateTime.Now,
-                Mascota = 1,
                 Cliente=1,
                 Formula=1,
                 Veterinario=1,

@@ -16,7 +16,7 @@ namespace asp_presentacion.Pages.Ventanas
         private IVeterinariosPresentacion? IVeterinariosPresentacion = null;
 
         public Historiales_ClinicosModel(IHistoriales_ClinicosPresentacion iPresentacion,
-            IMascotasPresentacion IMascotasPresentacion,
+            //IMascotasPresentacion IMascotasPresentacion,
             IClientesPresentacion IClientesPresentacion,
             IFormulasPresentacion IFormulasPresentacion,
             IVeterinariosPresentacion IVeterinariosPresentacion)
@@ -24,7 +24,7 @@ namespace asp_presentacion.Pages.Ventanas
             try
             {
                 this.iPresentacion = iPresentacion;
-                this.IMascotasPresentacion = IMascotasPresentacion;
+               //this.IMascotasPresentacion = IMascotasPresentacion;
                 this.IClientesPresentacion = IClientesPresentacion;
                 this.IFormulasPresentacion = IFormulasPresentacion;
                 this.IVeterinariosPresentacion = IVeterinariosPresentacion;
@@ -41,7 +41,7 @@ namespace asp_presentacion.Pages.Ventanas
         [BindProperty] public Historiales_Clinicos? Actual { get; set; }
         [BindProperty] public Historiales_Clinicos? Filtro { get; set; }
         [BindProperty] public List<Historiales_Clinicos>? Lista { get; set; }
-        [BindProperty] public List<Mascotas>? Mascotas { get; set; }
+       //[BindProperty] public List<Mascotas>? Mascotas { get; set; }
         [BindProperty] public List<Clientes>? Clientes { get; set; }
         [BindProperty] public List<Formulas>? Formulas { get; set; }
         [BindProperty] public List<Veterinarios>? Veterinarios { get; set; }
@@ -78,9 +78,9 @@ namespace asp_presentacion.Pages.Ventanas
         {
             try
             {
-                var task = this.IMascotasPresentacion!.Listar();
-                task.Wait();
-                Mascotas = task.Result;
+                //var task = this.IMascotasPresentacion!.Listar();
+                //task.Wait();
+                //Mascotas = task.Result;
 
                 var task1 = this.IClientesPresentacion!.Listar();
                 task1.Wait();

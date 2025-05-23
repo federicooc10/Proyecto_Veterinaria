@@ -50,8 +50,7 @@
                        asp-for="@Model.Actual!.Codigo" />
                 <input type="hidden"
                        asp-for="@Model.Actual!.Fecha" />
-                <input type="hidden"
-                       asp-for="@Model.Actual!.Mascota" />
+            //    <input type="hidden" asp-for="@Model.Actual!.Mascota" />
                 <input type="hidden"
                        asp-for="@Model.Actual!.Cliente" />
                 <input type="hidden"
@@ -98,7 +97,7 @@
                                            asp-for="@Model.Actual!.Fecha" />
                             </div>
                         </div>
-                        <div class="form-group">
+						@*                         <div class="form-group">
                             <label class="col-lg-4 control-label">
                                     Mascota
                             </label>
@@ -109,7 +108,7 @@
                                             asp-items="@(new SelectList(Model.Mascotas, "Id", "Nombre"))">
                                     </select>
                             </div>
-                        </div>
+                        </div> *@
                         <div class="form-group">
                             <label class="col-lg-4 control-label">
                                     Cliente
@@ -237,9 +236,9 @@
                                     <td>
                                         @elemento.Fecha
                                     </td>
-                                    <td class="cl_hidden">
+@*                                     <td class="cl_hidden">
                                         @elemento._Mascota!.Nombre
-                                    </td>
+                                    </td> *@
                                     <td class="cl_hidden">
                                         @elemento._Cliente!.Nombre
                                     </td>

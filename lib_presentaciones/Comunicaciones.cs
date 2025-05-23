@@ -11,7 +11,7 @@ namespace lib_presentaciones
 
         public Comunicaciones(string servicio = "",
             string protocolo = "http://", 
-            string host = "localhost:5231")
+            string host = "localhost:5103")
         {
             Protocolo = protocolo;
             Host = host;
@@ -48,8 +48,11 @@ namespace lib_presentaciones
 
                 if (!message.IsSuccessStatusCode)
                 {
-                   respuesta.Add("Error", "lbErrorComunicacion");
-                   return respuesta;
+                    var errorMsg = $"Error HTTP {(int)message.StatusCode} - {message.ReasonPhrase}. URL: {message.RequestMessage.RequestUri}";
+                    respuesta.Add("Error", errorMsg);
+                    return respuesta;
+                    //respuesta.Add("Error", "lbErrorComunicacion");
+                    //return respuesta;
                 }
 
                 var resp = await message.Content.ReadAsStringAsync();

@@ -125,20 +125,19 @@ CREATE TABLE [Historiales_Clinicos] (
 	[Id] INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	[Codigo] NVARCHAR(50) NOT NULL,
     [Fecha] SMALLDATETIME NOT NULL,
-	[Mascota] INT NOT NULL REFERENCES [Mascotas] ([Id]),
     [Cliente] INT NOT NULL REFERENCES [Clientes] ([Id]),
 	[Formula] INT NOT NULL REFERENCES [Formulas] ([Id]),
 	[Veterinario] INT NOT NULL REFERENCES [Veterinarios] ([Id])
 );
 
 INSERT INTO [Historiales_Clinicos] ([Codigo],[Fecha],[Mascota],[Cliente],[Formula],[Veterinario]) VALUES 
-	('AAA','2000-01-01',1,1,1,1),
-	('BBB','2000-01-01',2,2,2,2), 
-	('CCC','2000-01-01',4,1,3,3), 
-	('DDD','2000-01-01',3,3,4,3), 
-	('AAA','2000-01-02',1,4,5,2), 
-	('EEE','2000-01-02',5,5,6,4), 
-	('FFF','2000-01-03',6,6,7,4)
+	('AAA','2000-01-01',1,1,1),
+	('BBB','2000-01-01',2,2,2), 
+	('CCC','2000-01-01',1,3,3), 
+	('DDD','2000-01-01',3,4,3), 
+	('AAA','2000-01-02',4,5,2), 
+	('EEE','2000-01-02',5,6,4), 
+	('FFF','2000-01-03',6,7,4)
 	;
 
 SELECT * FROM [Historiales_Clinicos];
