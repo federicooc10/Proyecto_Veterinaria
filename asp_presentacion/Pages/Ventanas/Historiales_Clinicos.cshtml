@@ -1,7 +1,7 @@
 ﻿@page
 @model asp_presentacion.Pages.Ventanas.Historiales_ClinicosModel
 @{
-    ViewData["Titulo"] = "Productos";
+    ViewData["Titulo"] = "Historiales_Clinicos";
 }
 <center>
     <div>
@@ -45,26 +45,40 @@
             @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
             {
                 <input type="hidden"
+                       asp-for="@Model.Actual!.Id" />
+                <input type="hidden"
                        asp-for="@Model.Actual!.Codigo" />
                 <input type="hidden"
-                       asp-for="@Model.Actual!.Nombre" />
+                       asp-for="@Model.Actual!.Fecha" />
                 <input type="hidden"
-                       asp-for="@Model.Actual!.Lote" />
+                       asp-for="@Model.Actual!.Mascota" />
                 <input type="hidden"
-                       asp-for="@Model.Actual!.Cantidad" />
+                       asp-for="@Model.Actual!.Cliente" />
                 <input type="hidden"
-                       asp-for="@Model.Actual!.Precio" />
+                       asp-for="@Model.Actual!.Formula" />
                 <input type="hidden"
-                       asp-for="@Model.Actual!.Distribuidor" />
+                       asp-for="@Model.Actual!.Veterinario" />
             }
 
             @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Editar)
             {
                 <div class="containers_vn panel panel-default">
-                    <h3>Producto</h3>
+                    <h3>Historiales_Clinicos</h3>
 
                     <div>
                         <div class="form-group">
+                            <div>
+                            <label class="col-lg-4 control-label">
+                                Id
+                            </label>
+                            <div class="col-lg-6">
+                                <input id="nmId"
+                                       class="cts_forms form-control"
+                                       asp-for="@Model.Actual!.Id" />
+                            </div>
+                            </div>
+                        </div>
+                            <div>
                             <label class="col-lg-4 control-label">
                                 Codigo
                             </label>
@@ -76,53 +90,59 @@
                         </div>
                         <div class="form-group">
                             <label class="col-lg-4 control-label">
-                                Nombre
+                                Fecha
                             </label>
                             <div class="col-lg-6">
-                                <input id="nmNombre"
+                                    <input id="nmFecha"
                                        class="cts_forms form-control"
-                                       asp-for="@Model.Actual!.Nombre" />
+                                           asp-for="@Model.Actual!.Fecha" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-4 control-label">
-                                Lote
+                                    Mascota
                             </label>
                             <div class="col-lg-6">
-                                <input id="nmLote"
-                                       class="cts_forms form-control"
-                                       asp-for="@Model.Actual!.Lote" />
+                                    <select id="nmMascotas"
+                                                   class="form-control"
+                                            asp-for="@Model.Actual!.Mascota"
+                                            asp-items="@(new SelectList(Model.Mascotas, "Id", "Nombre"))">
+                                    </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-4 control-label">
-                                Cantidad
+                                    Cliente
                             </label>
                             <div class="col-lg-6">
-                                <input id="nmDirreccion"
-                                       class="cts_forms form-control"
-                                       asp-for="@Model.Actual!.Cantidad" />
+                                    <select id="nmCliente"
+                                            class="form-control"
+                                            asp-for="@Model.Actual!.Cliente"
+                                            asp-items="@(new SelectList(Model.Clientes, "Id", "Nombre"))">
+                                    </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-4 control-label">
-                                Precio
+                                    Formula
                             </label>
                             <div class="col-lg-6">
-                                <input id="nmDirreccion"
-                                       class="cts_forms form-control"
-                                       asp-for="@Model.Actual!.Precio" />
+                                    <select id="nmFormula"
+                                       class="form-control"
+                                           asp-for="@Model.Actual!.Formula"
+                                            asp-items="@(new SelectList(Model.Formulas, "Id", "Nombre"))">
+                                    </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-4 control-label">
-                                Distribuidor
+                                    Veterinario
                             </label>
                             <div class="col-lg-6">
-                                <select id="nmDistribuidor"
+                                    <select id="nmVeterinario"
                                     class="form-control"
-                                        asp-for="@Model.Actual!.Distribuidor"
-                                    asp-items="@(new SelectList(Model.Distribuidores, "Id", "Nombre"))">
+                                            asp-for="@Model.Actual!.Veterinario"
+                                    asp-items="@(new SelectList(Model.Veterinarios, "Id", "Nombre"))">
                                 </select>
                             </div>
                         </div>
@@ -152,7 +172,7 @@
                             </h4>
                             <h6 align="left">
                                 @Model.Actual!.Codigo,
-                                @Model.Actual!.Nombre
+                                @Model.Actual!.Id
                             </h6>
                             <br />
                             <br />
@@ -209,22 +229,25 @@
                             {
                                 <tr>
                                     <td>
+                                        @elemento.Id
+                                    </td>
+                                    <td>
                                         @elemento.Codigo
                                     </td>
                                     <td>
-                                        @elemento.Nombre
+                                        @elemento.Fecha
                                     </td>
                                     <td class="cl_hidden">
-                                        @elemento.Lote
+                                        @elemento._Mascota!.Nombre
                                     </td>
                                     <td class="cl_hidden">
-                                        @elemento.Cantidad
+                                        @elemento._Cliente!.Nombre
                                     </td>
                                     <td class="cl_hidden">
-                                        @elemento.Precio
+                                        @elemento._Formula!.Codigo
                                     </td>
                                     <td class="cl_hidden">
-                                        @elemento._Distribuidor!.Nombre
+                                        @elemento._Veterinario!.Nombre
                                     </td>
                                     <td>
                                         <input type="submit"

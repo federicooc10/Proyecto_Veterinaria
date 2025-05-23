@@ -58,6 +58,16 @@
                     <div>
                         <div class="form-group">
                             <label class="col-lg-4 control-label">
+                                Id
+                            </label>
+                            <div class="col-lg-6">
+                                <input id="nmId"
+                                       class="cts_forms form-control"
+                                       asp-for="@Model.Actual!.Id" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">
                                 Codigo
                             </label>
                             <div class="col-lg-6">
@@ -71,50 +81,10 @@
                                 Mascota
                             </label>
                             <div class="col-lg-6">
-                                <input id="nmMascota"
-                                       class="cts_forms form-control"
-                                       asp-for="@Model.Actual!.Mascota" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-4 control-label">
-                                Lote
-                            </label>
-                            <div class="col-lg-6">
-                                <input id="nmLote"
-                                       class="cts_forms form-control"
-                                       asp-for="@Model.Actual!.Lote" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-4 control-label">
-                                Cantidad
-                            </label>
-                            <div class="col-lg-6">
-                                <input id="nmDirreccion"
-                                       class="cts_forms form-control"
-                                       asp-for="@Model.Actual!.Cantidad" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-4 control-label">
-                                Precio
-                            </label>
-                            <div class="col-lg-6">
-                                <input id="nmDirreccion"
-                                       class="cts_forms form-control"
-                                       asp-for="@Model.Actual!.Precio" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-4 control-label">
-                                Distribuidor
-                            </label>
-                            <div class="col-lg-6">
-                                <select id="nmDistribuidor"
+                                <select id="nmMascota"
                                     class="form-control"
-                                        asp-for="@Model.Actual!.Distribuidor"
-                                    asp-items="@(new SelectList(Model.Distribuidores, "Id", "Mascota"))">
+                                        asp-for="@Model.Actual!.Mascota"
+                                    asp-items="@(new SelectList(Model.Mascotas, "Id", "Mascota"))">
                                 </select>
                             </div>
                         </div>
@@ -201,22 +171,13 @@
                             {
                                 <tr>
                                     <td>
-                                        @elemento.Codigo
+                                        @elemento.Id
                                     </td>
                                     <td>
-                                        @elemento.Mascota
+                                        @elemento.Codigo
                                     </td>
                                     <td class="cl_hidden">
-                                        @elemento.Lote
-                                    </td>
-                                    <td class="cl_hidden">
-                                        @elemento.Cantidad
-                                    </td>
-                                    <td class="cl_hidden">
-                                        @elemento.Precio
-                                    </td>
-                                    <td class="cl_hidden">
-                                        @elemento._Distribuidor!.Mascota
+                                        @elemento._Mascota!.Nombre
                                     </td>
                                     <td>
                                         <input type="submit"
