@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using lib_dominio.Entidades;
 
 namespace lib_dominio.Entidades
 
@@ -18,7 +19,7 @@ namespace lib_dominio.Entidades
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string? Codigo { get; set; }
+        public string? Codigo { get; set; } = "";
         public int Mascota { get; set; }
         [ForeignKey("Mascota")] public Mascotas? _Mascota { get; set; }
 
