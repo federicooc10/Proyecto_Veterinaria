@@ -130,7 +130,7 @@ CREATE TABLE [Historiales_Clinicos] (
 	[Veterinario] INT NOT NULL REFERENCES [Veterinarios] ([Id])
 );
 
-INSERT INTO [Historiales_Clinicos] ([Codigo],[Fecha],[Mascota],[Cliente],[Formula],[Veterinario]) VALUES 
+INSERT INTO [Historiales_Clinicos] ([Codigo],[Fecha],[Cliente],[Formula],[Veterinario]) VALUES 
 	('AAA','2000-01-01',1,1,1),
 	('BBB','2000-01-01',2,2,2), 
 	('CCC','2000-01-01',1,3,3), 

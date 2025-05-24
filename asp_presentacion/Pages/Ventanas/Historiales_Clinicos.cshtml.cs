@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations.Schema;
 using lib_dominio.Entidades;
 using lib_dominio.Nucleo;
 using lib_presentaciones.Interfaces;
@@ -10,13 +9,12 @@ namespace asp_presentacion.Pages.Ventanas
     public class Historiales_ClinicosModel : PageModel
     {
         private IHistoriales_ClinicosPresentacion? iPresentacion = null;
-        private IMascotasPresentacion? IMascotasPresentacion = null;
         private IClientesPresentacion? IClientesPresentacion = null;
         private IFormulasPresentacion? IFormulasPresentacion = null;
         private IVeterinariosPresentacion? IVeterinariosPresentacion = null;
 
-        public Historiales_ClinicosModel(IHistoriales_ClinicosPresentacion iPresentacion,
-            //IMascotasPresentacion IMascotasPresentacion,
+        public Historiales_ClinicosModel(
+            IHistoriales_ClinicosPresentacion iPresentacion,
             IClientesPresentacion IClientesPresentacion,
             IFormulasPresentacion IFormulasPresentacion,
             IVeterinariosPresentacion IVeterinariosPresentacion)
@@ -24,7 +22,6 @@ namespace asp_presentacion.Pages.Ventanas
             try
             {
                 this.iPresentacion = iPresentacion;
-               //this.IMascotasPresentacion = IMascotasPresentacion;
                 this.IClientesPresentacion = IClientesPresentacion;
                 this.IFormulasPresentacion = IFormulasPresentacion;
                 this.IVeterinariosPresentacion = IVeterinariosPresentacion;
@@ -41,12 +38,14 @@ namespace asp_presentacion.Pages.Ventanas
         [BindProperty] public Historiales_Clinicos? Actual { get; set; }
         [BindProperty] public Historiales_Clinicos? Filtro { get; set; }
         [BindProperty] public List<Historiales_Clinicos>? Lista { get; set; }
-       //[BindProperty] public List<Mascotas>? Mascotas { get; set; }
         [BindProperty] public List<Clientes>? Clientes { get; set; }
         [BindProperty] public List<Formulas>? Formulas { get; set; }
-        [BindProperty] public List<Veterinarios>? Veterinarios { get; set; }
+        [BindProperty] public List<Veterinarios>? Veterinarios{ get; set; }
 
-        public virtual void OnGet() { OnPostBtRefrescar(); }
+        public virtual void OnGet()
+        {
+            OnPostBtRefrescar();
+        }
 
         public void OnPostBtRefrescar()
         {
@@ -59,13 +58,21 @@ namespace asp_presentacion.Pages.Ventanas
                     return;
                 }
 
-                Filtro!.Codigo = Filtro!.Codigo ?? "";
-
                 Accion = Enumerables.Ventanas.Listas;
 
-                var task = this.iPresentacion!.Listar();
-                task.Wait();
-                Lista = task.Result;
+                if (Filtro == null || Filtro.Id == 0)
+                {
+                    var task = this.iPresentacion!.Listar();
+                    task.Wait();
+                    Lista = task.Result;
+                }
+                else
+                {
+                    var task = this.iPresentacion!.PorCodigo(Filtro);
+                    task.Wait();
+                    Lista = task.Result;
+                }
+
                 Actual = null;
             }
             catch (Exception ex)
@@ -74,26 +81,20 @@ namespace asp_presentacion.Pages.Ventanas
             }
         }
 
+
         private void CargarCombox()
         {
             try
             {
-                //var task = this.IMascotasPresentacion!.Listar();
-                //task.Wait();
-                //Mascotas = task.Result;
+                var taskClientes = this.IClientesPresentacion!.Listar();
+                var taskFormulas = this.IFormulasPresentacion!.Listar();
+                var taskVeterinarios = this.IVeterinariosPresentacion!.Listar();
 
-                var task1 = this.IClientesPresentacion!.Listar();
-                task1.Wait();
-                Clientes = task1.Result;
+                Task.WaitAll(taskClientes, taskFormulas, taskVeterinarios);
 
-                var task2 = this.IFormulasPresentacion!.Listar();
-                task2.Wait();
-                Formulas = task2.Result;
-
-                var task3 = this.IVeterinariosPresentacion!.Listar();
-                task3.Wait();
-                Veterinarios = task3.Result;
-
+                Clientes = taskClientes.Result;
+                Formulas = taskFormulas.Result;
+                Veterinarios = taskVeterinarios.Result;
             }
             catch (Exception ex)
             {
@@ -142,6 +143,7 @@ namespace asp_presentacion.Pages.Ventanas
                 else
                     task = this.iPresentacion!.Modificar(Actual!)!;
                 task.Wait();
+
                 Actual = task.Result;
                 Accion = Enumerables.Ventanas.Listas;
                 OnPostBtRefrescar();
