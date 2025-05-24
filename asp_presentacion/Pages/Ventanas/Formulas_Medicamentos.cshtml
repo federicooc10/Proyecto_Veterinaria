@@ -88,7 +88,7 @@
                                 <select id="nmFormula"
                                     class="form-control"
                                         asp-for="@Model.Actual!.Formula"
-                                    asp-items="@(new SelectList(Model.Formulas, "Id", "Nombre"))">
+                                    asp-items="@(new SelectList(Model.Formulas, "Id", "Codigo"))">
                                 </select>
                             </div>
                         </div>
@@ -148,7 +148,7 @@
             }
 
             @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas ||
-                 Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
+            Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
             {
                 <input id="flId"
                        class="cts_forms form-control"
@@ -158,58 +158,51 @@
 
                 <div class="containers_vn panel panel-default">
                     <table class="tb_data table table-striped table-bordered table-hover">
-                        <tr>
-                            <th>
-                                Id
-                            </th>
-                            <th>
-                                Cantidad
-                            </th>
-                            <th class="cl_hidden">
-                                Formula
-                            </th>
-                            <th class="cl_hidden">
-                                Medicamento
-                            </th>
-                            <th>
-                                Accion
-                            </th>
-                        </tr>
-                        @if (Model != null && Model.Lista != null)
-                        {
-                            @foreach (var elemento in Model.Lista)
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Cantidad</th>
+                                <th>Formula</th>
+                                <th>Medicamento</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Lista != null && Model.Lista.Any())
+                            {
+                                foreach (var elemento in Model.Lista)
+                                {
+                                    <tr>
+                                        <td>@elemento.Id</td>
+                                        <td>@elemento.Cantidad</td>
+                                        <td>@elemento._Formula?.Codigo ?? "—"</td>
+                                        <td>@elemento._Medicamento?.Nombre ?? "—"</td>
+                                        <td>
+                                            <input type="submit"
+                                                   value="Modificar"
+                                                   asp-page-handler="BtModificar"
+                                                   class="btn btn-secondary"
+                                                   asp-route-data="@elemento.Id" />
+                                            <input type="submit"
+                                                   value="Borrar"
+                                                   asp-page-handler="BtBorrarVal"
+                                                   class="btn btn-danger"
+                                                   asp-route-data="@elemento.Id" />
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
                             {
                                 <tr>
-                                    <td>
-                                        @elemento.Id
-                                    </td>
-                                    <td>
-                                        @elemento.Cantidad
-                                    </td>
-                                    <td class="cl_hidden">
-                                        @elemento._Formula!.Codigo
-                                    </td>
-                                    <td class="cl_hidden">
-                                        @elemento._Medicamento!.Nombre
-                                    </td>
-                                    <td>
-                                        <input type="submit"
-                                               value="Modicar"
-                                               asp-page-handler="BtModificar"
-                                               class="btn btn-secondary"
-                                               asp-route-data="@elemento.Id" />
-                                        <input type="submit"
-                                               value="Borrar"
-                                               asp-page-handler="BtBorrarVal"
-                                               class="btn btn-secondary"
-                                               asp-route-data="@elemento.Id" />
-                                    </td>
+                                    <td colspan="5"><strong>No hay datos disponibles.</strong></td>
                                 </tr>
                             }
-                        }
+                        </tbody>
                     </table>
                 </div>
             }
+
         </form>
     </div>
 </center>

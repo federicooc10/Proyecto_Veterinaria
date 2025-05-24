@@ -12,7 +12,8 @@ namespace asp_presentacion.Pages.Ventanas
         private IFormulasPresentacion? IFormulasPresentacion = null;
         private IMedicamentosPresentacion? IMedicamentosPresentacion = null;
 
-        public Formulas_MedicamentosModel(IFormulas_MedicamentosPresentacion iPresentacion,
+        public Formulas_MedicamentosModel(
+            IFormulas_MedicamentosPresentacion iPresentacion,
             IFormulasPresentacion IFormulasPresentacion,
             IMedicamentosPresentacion IMedicamentosPresentacion)
         {
@@ -20,6 +21,7 @@ namespace asp_presentacion.Pages.Ventanas
             {
                 this.iPresentacion = iPresentacion;
                 this.IFormulasPresentacion = IFormulasPresentacion;
+                this.IMedicamentosPresentacion = IMedicamentosPresentacion;
                 Filtro = new Formulas_Medicamentos();
             }
             catch (Exception ex)
@@ -36,7 +38,10 @@ namespace asp_presentacion.Pages.Ventanas
         [BindProperty] public List<Formulas>? Formulas { get; set; }
         [BindProperty] public List<Medicamentos>? Medicamentos { get; set; }
 
-        public virtual void OnGet() { OnPostBtRefrescar(); }
+        public virtual void OnGet()
+        {
+            OnPostBtRefrescar();
+        }
 
         public void OnPostBtRefrescar()
         {
@@ -49,13 +54,21 @@ namespace asp_presentacion.Pages.Ventanas
                     return;
                 }
 
-                Filtro!.Id = Filtro!.Id;
-
                 Accion = Enumerables.Ventanas.Listas;
 
-                var task = this.iPresentacion!.PorId(Filtro!);
-                task.Wait();
-                Lista = task.Result;
+                if (Filtro == null || Filtro.Id == 0)
+                {
+                    var task = this.iPresentacion!.Listar();
+                    task.Wait();
+                    Lista = task.Result;
+                }
+                else
+                {
+                    var task = this.iPresentacion!.PorId(Filtro);
+                    task.Wait();
+                    Lista = task.Result;
+                }
+
                 Actual = null;
             }
             catch (Exception ex)
@@ -64,13 +77,18 @@ namespace asp_presentacion.Pages.Ventanas
             }
         }
 
+
         private void CargarCombox()
         {
             try
             {
-                var task = this.IFormulasPresentacion!.Listar();
-                task.Wait();
-                Formulas = task.Result;
+                var taskFormulas = this.IFormulasPresentacion!.Listar();
+                var taskMedicamentos = this.IMedicamentosPresentacion!.Listar();
+
+                Task.WaitAll(taskFormulas, taskMedicamentos);
+
+                Formulas = taskFormulas.Result;
+                Medicamentos = taskMedicamentos.Result;
             }
             catch (Exception ex)
             {
@@ -119,6 +137,7 @@ namespace asp_presentacion.Pages.Ventanas
                 else
                     task = this.iPresentacion!.Modificar(Actual!)!;
                 task.Wait();
+
                 Actual = task.Result;
                 Accion = Enumerables.Ventanas.Listas;
                 OnPostBtRefrescar();
