@@ -50,13 +50,12 @@ namespace asp_presentacion.Pages.Ventanas
                     return;
                 }
 
-                Filtro!.Id = Filtro!.Id;
-
                 Accion = Enumerables.Ventanas.Listas;
 
-                var task = this.iPresentacion!.PorId(Filtro!);
+                var task = this.iPresentacion!.Listar();
                 task.Wait();
                 Lista = task.Result;
+
                 Actual = null;
             }
             catch (Exception ex)
@@ -64,6 +63,7 @@ namespace asp_presentacion.Pages.Ventanas
                 LogConversor.Log(ex, ViewData!);
             }
         }
+
 
         private void CargarCombox()
         {

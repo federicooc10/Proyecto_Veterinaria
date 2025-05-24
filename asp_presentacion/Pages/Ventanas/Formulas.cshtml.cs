@@ -14,7 +14,6 @@ namespace asp_presentacion.Pages.Ventanas
         public FormulasModel(IFormulasPresentacion iPresentacion,
             IMascotasPresentacion iDistribuidoresPresentacion)
         {
-            
             try
             {
                 this.iPresentacion = iPresentacion;
