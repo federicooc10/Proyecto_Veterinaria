@@ -175,8 +175,8 @@
                                     <tr>
                                         <td>@elemento.Id</td>
                                         <td>@elemento.Cantidad</td>
-                                        <td>@elemento._Formula?.Codigo ?? "—"</td>
-                                        <td>@elemento._Medicamento?.Nombre ?? "—"</td>
+                                        <td>@elemento._Formula?.Codigo</td>
+                                        <td>@elemento._Medicamento?.Nombre</td>
                                         <td>
                                             <input type="submit"
                                                    value="Modificar"
@@ -186,7 +186,7 @@
                                             <input type="submit"
                                                    value="Borrar"
                                                    asp-page-handler="BtBorrarVal"
-                                                   class="btn btn-danger"
+                                                   class="btn btn-danger"  @* aca se pone danger en vez de secondary pa q se ponga rojo*@
                                                    asp-route-data="@elemento.Id" />
                                         </td>
                                     </tr>
