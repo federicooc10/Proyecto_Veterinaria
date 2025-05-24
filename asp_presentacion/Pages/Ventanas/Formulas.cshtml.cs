@@ -1,4 +1,3 @@
-// Pages/Ventanas/Formulas.cshtml.cs
 using lib_dominio.Entidades;
 using lib_dominio.Nucleo;
 using lib_presentaciones.Interfaces;
@@ -10,18 +9,16 @@ namespace asp_presentacion.Pages.Ventanas
     public class FormulasModel : PageModel
     {
         private IFormulasPresentacion? iPresentacion = null;
-        private IMascotasPresentacion? iDistribuidoresPresentacion = null;
+        private IMascotasPresentacion? IMascotasPresentacion = null;
 
         public FormulasModel(IFormulasPresentacion iPresentacion,
-            IMascotasPresentacion iDistribuidoresPresentacion)
+            IMascotasPresentacion IMascotasPresentacion)
         {
             try
             {
                 this.iPresentacion = iPresentacion;
-                this.iDistribuidoresPresentacion = iDistribuidoresPresentacion;
+                this.IMascotasPresentacion = IMascotasPresentacion;
                 Filtro = new Formulas();
-                Mascotas = new List<Mascotas>();
-                Accion = Enumerables.Ventanas.Listas; // ? Valor por defecto
             }
             catch (Exception ex)
             {
@@ -50,6 +47,7 @@ namespace asp_presentacion.Pages.Ventanas
                 }
 
                 Filtro!.Codigo = Filtro!.Codigo ?? "";
+
                 Accion = Enumerables.Ventanas.Listas;
 
                 var task = this.iPresentacion!.PorCodigo(Filtro!);
@@ -67,7 +65,7 @@ namespace asp_presentacion.Pages.Ventanas
         {
             try
             {
-                var task = this.iDistribuidoresPresentacion!.Listar();
+                var task = this.IMascotasPresentacion!.Listar();
                 task.Wait();
                 Mascotas = task.Result;
             }

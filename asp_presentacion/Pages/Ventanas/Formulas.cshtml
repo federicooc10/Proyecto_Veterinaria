@@ -18,39 +18,41 @@
                        value="Refrescar"
                        asp-page-handler="BtRefrescar"
                        class="btn btn-secondary"
-                       disabled="@(Model != null && Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
+                       disabled="@(Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
                 <input type="submit"
                        value="Nuevo"
                        asp-page-handler="BtNuevo"
                        class="btn btn-secondary"
-                       disabled="@(Model != null && Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
+                       disabled="@(Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
                 <input type="submit"
                        value="Guardar"
                        asp-page-handler="BtGuardar"
                        class="btn btn-secondary"
-                       disabled="@(Model != null && Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
+                       disabled="@(Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
                 <input type="submit"
                        value="Cancelar"
                        asp-page-handler="BtCancelar"
                        class="btn btn-secondary"
-                       disabled="@(Model != null && Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
+                       disabled="@(Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
             </div>
 
-            @if (Model != null && (Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas ||
-            Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar))
+            @if (Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas ||
+                 Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
             {
                 <input type="hidden"
                        asp-for="@Model.Actual!.Id" />
             }
-            @if (Model != null && Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
+            @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
             {
+                <input type="hidden"
+                       asp-for="@Model.Actual!.Id" />
                 <input type="hidden"
                        asp-for="@Model.Actual!.Codigo" />
                 <input type="hidden"
                        asp-for="@Model.Actual!.Mascota" />
             }
 
-            @if (Model != null && Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Editar)
+            @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Editar)
             {
                 <div class="containers_vn panel panel-default">
                     <h3>Formulas</h3>
@@ -68,23 +70,34 @@
                         </div>
                         <div class="form-group">
                             <label class="col-lg-4 control-label">
-                                Codigo
+                                Nombre
                             </label>
                             <div class="col-lg-6">
-                                <input id="nmCodigo"
+                                <input id="nmNombre"
                                        class="cts_forms form-control"
                                        asp-for="@Model.Actual!.Codigo" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-4 control-label">
+                                Lote
+                            </label>
+                            <div class="col-lg-6">
+                                <input id="nmLote"
+                                       class="cts_forms form-control"
+                                       asp-for="@Model.Actual!.Mascota" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">
                                 Mascota
                             </label>
                             <div class="col-lg-6">
                                 <select id="nmMascota"
-                                        class="form-control"
+                                    class="form-control"
                                         asp-for="@Model.Actual!.Mascota"
-                                        asp-items="@(new SelectList(Model.Mascotas, "Id", "Mascota"))">
+                                    asp-items="@(new SelectList(Model.Mascotas, "Id", "Nombre"))">
                                 </select>
                             </div>
                         </div>
@@ -97,9 +110,10 @@
                 <input type="hidden"
                        asp-for="@Model.Accion" />
                 @await Html.PartialAsync("../Emergentes/Mensajes.cshtml")
+                ;
             }
 
-            @if (Model != null && Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
+            @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
             {
                 <div class='popup'>
                     <div class='pp_del_inner'>
@@ -112,8 +126,8 @@
                                 Desea borrar la entidad?
                             </h4>
                             <h6 align="left">
-                                @Model.Actual!.Codigo,
-                                @Model.Actual!.Mascota
+                                @Model.Actual!.Id,
+                                @Model.Actual!.Codigo
                             </h6>
                             <br />
                             <br />
@@ -130,13 +144,13 @@
                 </div>
             }
 
-            @if (Model != null && (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas ||
-            Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar))
+            @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas ||
+                 Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
             {
-                <input id="flCodigo"
+                <input id="flId"
                        class="cts_forms form-control"
-                       asp-for="@Model.Filtro!.Codigo"
-                       placeholder="Codigo" />
+                       asp-for="@Model.Filtro!.Id"
+                       placeholder="Id" />
                 <br />
 
                 <div class="containers_vn panel panel-default">
@@ -148,7 +162,7 @@
                             <th>
                                 Codigo
                             </th>
-                            <th>
+                            <th class="cl_hidden">
                                 Mascota
                             </th>
                             <th>
