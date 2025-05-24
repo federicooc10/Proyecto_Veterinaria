@@ -10,7 +10,7 @@
             @Html.AntiForgeryToken()
 
             <div align="left">
-                <h3>Formulas Medicamentos</h3>
+                <h3>Formulas_Medicamentos</h3>
             </div>
             <div align="left"
                  class="bt_panel_buttons">
@@ -47,11 +47,11 @@
                 <input type="hidden"
                        asp-for="@Model.Actual!.Id" />
                 <input type="hidden"
-                       asp-for="@Model.Actual!.Formula" />
-                <input type="hidden"
-                       asp-for="@Model.Actual!.Medicamento" />
-                <input type="hidden"
                        asp-for="@Model.Actual!.Cantidad" />
+                <input type="hidden"
+                       asp-for="@Model.Actual!.Formula" />
+                  <input type="hidden"
+                       asp-for="@Model.Actual!.Medicamento" />
             }
 
             @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Editar)
@@ -62,7 +62,7 @@
                     <div>
                         <div class="form-group">
                             <label class="col-lg-4 control-label">
-                                id
+                                Id
                             </label>
                             <div class="col-lg-6">
                                 <input id="nmId"
@@ -72,36 +72,36 @@
                         </div>
                         <div class="form-group">
                             <label class="col-lg-4 control-label">
-                                Formula
-                            </label>
-                            <div class="col-lg-6">
-                                <select id="nmFormula"
-                                        class="form-control"
-                                        asp-for="@Model.Actual!.Formula"
-                                        asp-items="@(new SelectList(Model.Formulas, "Id", "Nombre"))">
-                                </select>
-                            </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-lg-4 control-label">
-                                    Medicamento
-                                </label>
-                                <div class="col-lg-6">
-                                    <select id="nmMedicamento"
-                                            class="form-control"
-                                            asp-for="@Model.Actual!.Medicamento"
-                                            asp-items="@(new SelectList(Model.Medicamentos, "Id", "Nombre"))">
-                                    </select>
-                                </div>
-                                </div>
-                        <div class="form-group">
-                            <label class="col-lg-4 control-label">
                                 Cantidad
                             </label>
                             <div class="col-lg-6">
                                 <input id="nmCantidad"
                                        class="cts_forms form-control"
                                        asp-for="@Model.Actual!.Cantidad" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">
+                                Formula
+                            </label>
+                            <div class="col-lg-6">
+                                <select id="nmFormula"
+                                    class="form-control"
+                                        asp-for="@Model.Actual!.Formula"
+                                    asp-items="@(new SelectList(Model.Formulas, "Id", "Nombre"))">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">
+                                Medicamento
+                            </label>
+                            <div class="col-lg-6">
+                                <select id="nmMedicamento"
+                                        class="form-control"
+                                        asp-for="@Model.Actual!.Medicamento"
+                                        asp-items="@(new SelectList(Model.Medicamentos, "Id", "Nombre"))">
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -129,7 +129,8 @@
                                 Desea borrar la entidad?
                             </h4>
                             <h6 align="left">
-                                @Model.Actual!.Id
+                                @Model.Actual!.Id,
+                                @Model.Actual!.Cantidad
                             </h6>
                             <br />
                             <br />
@@ -149,10 +150,10 @@
             @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas ||
                  Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
             {
-                <input id="flCodigo"
+                <input id="flId"
                        class="cts_forms form-control"
                        asp-for="@Model.Filtro!.Id"
-                       placeholder="Codigo" />
+                       placeholder="Id" />
                 <br />
 
                 <div class="containers_vn panel panel-default">
@@ -162,13 +163,13 @@
                                 Id
                             </th>
                             <th>
+                                Cantidad
+                            </th>
+                            <th class="cl_hidden">
                                 Formula
                             </th>
                             <th class="cl_hidden">
                                 Medicamento
-                            </th>
-                            <th class="cl_actions">
-                                Cantidad
                             </th>
                             <th>
                                 Accion
@@ -182,14 +183,14 @@
                                     <td>
                                         @elemento.Id
                                     </td>
+                                    <td>
+                                        @elemento.Cantidad
+                                    </td>
                                     <td class="cl_hidden">
                                         @elemento._Formula!.Codigo
                                     </td>
                                     <td class="cl_hidden">
                                         @elemento._Medicamento!.Nombre
-                                    </td>
-                                    <td class="cl_hidden">
-                                        @elemento.Cantidad
                                     </td>
                                     <td>
                                         <input type="submit"

@@ -13,14 +13,13 @@ namespace asp_presentacion.Pages.Ventanas
         private IMedicamentosPresentacion? IMedicamentosPresentacion = null;
 
         public Formulas_MedicamentosModel(IFormulas_MedicamentosPresentacion iPresentacion,
-            IFormulasPresentacion IFormulasPresentacion, 
+            IFormulasPresentacion IFormulasPresentacion,
             IMedicamentosPresentacion IMedicamentosPresentacion)
         {
             try
             {
                 this.iPresentacion = iPresentacion;
                 this.IFormulasPresentacion = IFormulasPresentacion;
-                this.IMedicamentosPresentacion = IMedicamentosPresentacion;
                 Filtro = new Formulas_Medicamentos();
             }
             catch (Exception ex)
@@ -50,12 +49,13 @@ namespace asp_presentacion.Pages.Ventanas
                     return;
                 }
 
+                Filtro!.Id = Filtro!.Id;
+
                 Accion = Enumerables.Ventanas.Listas;
 
-                var task = this.iPresentacion!.Listar();
+                var task = this.iPresentacion!.PorId(Filtro!);
                 task.Wait();
                 Lista = task.Result;
-
                 Actual = null;
             }
             catch (Exception ex)
@@ -64,7 +64,6 @@ namespace asp_presentacion.Pages.Ventanas
             }
         }
 
-
         private void CargarCombox()
         {
             try
@@ -72,10 +71,6 @@ namespace asp_presentacion.Pages.Ventanas
                 var task = this.IFormulasPresentacion!.Listar();
                 task.Wait();
                 Formulas = task.Result;
-
-                var task2 = this.IMedicamentosPresentacion!.Listar();
-                task2.Wait();
-                Medicamentos = task2.Result;
             }
             catch (Exception ex)
             {
