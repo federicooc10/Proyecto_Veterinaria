@@ -15,8 +15,8 @@
             <div align="left"
                  class="bt_panel_buttons">
                 <input type="submit"
-                       value="Refrescar"
-                       asp-page-handler="BtRefrescar"
+                       value="Buscar"
+                       asp-page-handler="BtBuscar"
                        class="btn btn-secondary"
                        disabled="@(Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
                 <input type="submit"
@@ -209,7 +209,7 @@
                                             <input type="submit"
                                                    value="Modificar"
                                                    asp-page-handler="BtModificar"
-                                                   class="btn btn-secondary"
+                                                   class="btn btn-warning"
                                                    asp-route-data="@elemento.Id" />
                                             <input type="submit"
                                                    value="Borrar"
