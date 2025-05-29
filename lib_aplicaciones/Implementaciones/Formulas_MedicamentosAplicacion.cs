@@ -8,8 +8,9 @@ namespace lib_aplicaciones.Implementaciones
     public class Formulas_MedicamentosAplicacion : IFormulas_MedicamentosAplicacion
     {
         private IConexion? IConexion = null;
+        private IAuditoriasAplicacion? IAuditoriasAplicacion = null;
 
-        public Formulas_MedicamentosAplicacion(IConexion iConexion)
+        public Formulas_MedicamentosAplicacion(IConexion iConexion, IAuditoriasAplicacion iAuditoriasAplicacion)
         {
             this.IConexion = iConexion;
         }
@@ -31,6 +32,15 @@ namespace lib_aplicaciones.Implementaciones
 
             this.IConexion!.Formulas_Medicamentos!.Remove(entidad);
             this.IConexion.SaveChanges();
+            this.IAuditoriasAplicacion!.Configurar(this.IConexion.StringConexion!);
+            this.IAuditoriasAplicacion!.Guardar(new Auditorias
+            {
+                Usuario = "admin",
+                Entidad = "Empleados",
+                Operacion = "Borrar",
+                Datos = JsonConversor.ConvertirAString(entidad!),
+                Fecha = DateTime.Now
+            });
             return entidad;
         }
 
@@ -46,6 +56,15 @@ namespace lib_aplicaciones.Implementaciones
 
             this.IConexion!.Formulas_Medicamentos!.Add(entidad);
             this.IConexion.SaveChanges();
+            this.IAuditoriasAplicacion!.Configurar(this.IConexion.StringConexion!);
+            this.IAuditoriasAplicacion!.Guardar(new Auditorias
+            {
+                Usuario = "admin",
+                Entidad = "Empleados",
+                Operacion = "Borrar",
+                Datos = JsonConversor.ConvertirAString(entidad!),
+                Fecha = DateTime.Now
+            });
             return entidad;
         }
 
@@ -80,6 +99,15 @@ namespace lib_aplicaciones.Implementaciones
             var entry = this.IConexion!.Entry<Formulas_Medicamentos>(entidad);
             entry.State = EntityState.Modified;
             this.IConexion.SaveChanges();
+            this.IAuditoriasAplicacion!.Configurar(this.IConexion.StringConexion!);
+            this.IAuditoriasAplicacion!.Guardar(new Auditorias
+            {
+                Usuario = "admin",
+                Entidad = "Empleados",
+                Operacion = "Borrar",
+                Datos = JsonConversor.ConvertirAString(entidad!),
+                Fecha = DateTime.Now
+            });
             return entidad;
         }
     }

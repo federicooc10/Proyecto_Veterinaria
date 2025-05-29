@@ -8,8 +8,9 @@ namespace lib_aplicaciones.Implementaciones
     public class ClientesAplicacion : IClientesAplicacion
     {
         private IConexion? IConexion = null;
+        private IAuditoriasAplicacion? IAuditoriasAplicacion = null;
 
-        public ClientesAplicacion(IConexion iConexion)
+        public ClientesAplicacion(IConexion iConexion, IAuditoriasAplicacion iAuditoriasAplicacion)
         {
             this.IConexion = iConexion;
         }
@@ -31,6 +32,15 @@ namespace lib_aplicaciones.Implementaciones
 
             this.IConexion!.Clientes!.Remove(entidad);
             this.IConexion.SaveChanges();
+            this.IAuditoriasAplicacion!.Configurar(this.IConexion.StringConexion!);
+            this.IAuditoriasAplicacion!.Guardar(new Auditorias
+            {
+                Usuario = "admin",
+                Entidad = "Empleados",
+                Operacion = "Borrar",
+                Datos = JsonConversor.ConvertirAString(entidad!),
+                Fecha = DateTime.Now
+            });
             return entidad;
         }
 
@@ -46,6 +56,15 @@ namespace lib_aplicaciones.Implementaciones
 
             this.IConexion!.Clientes!.Add(entidad);
             this.IConexion.SaveChanges();
+            this.IAuditoriasAplicacion!.Configurar(this.IConexion.StringConexion!);
+            this.IAuditoriasAplicacion!.Guardar(new Auditorias
+            {
+                Usuario = "admin",
+                Entidad = "Empleados",
+                Operacion = "Borrar",
+                Datos = JsonConversor.ConvertirAString(entidad!),
+                Fecha = DateTime.Now
+            });
             return entidad;
         }
 
@@ -74,6 +93,15 @@ namespace lib_aplicaciones.Implementaciones
             var entry = this.IConexion!.Entry<Clientes>(entidad);
             entry.State = EntityState.Modified;
             this.IConexion.SaveChanges();
+            this.IAuditoriasAplicacion!.Configurar(this.IConexion.StringConexion!);
+            this.IAuditoriasAplicacion!.Guardar(new Auditorias
+            {
+                Usuario = "admin",
+                Entidad = "Empleados",
+                Operacion = "Borrar",
+                Datos = JsonConversor.ConvertirAString(entidad!),
+                Fecha = DateTime.Now
+            });
             return entidad;
         }
     }
