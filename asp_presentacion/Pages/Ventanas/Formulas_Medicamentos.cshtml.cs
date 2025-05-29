@@ -22,7 +22,12 @@ namespace asp_presentacion.Pages.Ventanas
                 this.iPresentacion = iPresentacion;
                 this.IFormulasPresentacion = IFormulasPresentacion;
                 this.IMedicamentosPresentacion = IMedicamentosPresentacion;
-                Filtro = new Formulas_Medicamentos();
+                Filtro = new Formulas_Medicamentos
+                {
+                    _Formula = new Formulas()
+                };
+
+
             }
             catch (Exception ex)
             {
@@ -56,18 +61,21 @@ namespace asp_presentacion.Pages.Ventanas
 
                 Accion = Enumerables.Ventanas.Listas;
 
-                if (Filtro == null || Filtro.Id == 0)
+                var task = this.iPresentacion!.Listar();
+                task.Wait();
+                var listaCompleta = task.Result;
+
+                if (!string.IsNullOrWhiteSpace(Filtro!._Formula?.Codigo))
                 {
-                    var task = this.iPresentacion!.Listar();
-                    task.Wait();
-                    Lista = task.Result;
+                    listaCompleta = listaCompleta
+                        .Where(x => x._Formula != null &&
+                                    x._Formula.Codigo != null &&
+                                    x._Formula.Codigo.Contains(Filtro._Formula.Codigo, StringComparison.OrdinalIgnoreCase))
+                        .ToList();
                 }
-                else
-                {
-                    var task = this.iPresentacion!.PorId(Filtro);
-                    task.Wait();
-                    Lista = task.Result;
-                }
+
+                Lista = listaCompleta;
+
 
                 Actual = null;
             }

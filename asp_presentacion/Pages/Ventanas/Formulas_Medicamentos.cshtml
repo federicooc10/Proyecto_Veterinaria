@@ -45,8 +45,6 @@
             @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
             {
                 <input type="hidden"
-                       asp-for="@Model.Actual!.Id" />
-                <input type="hidden"
                        asp-for="@Model.Actual!.Cantidad" />
                 <input type="hidden"
                        asp-for="@Model.Actual!.Formula" />
@@ -60,26 +58,7 @@
                     <h3>Formulas_Medicamentos</h3>
 
                     <div>
-                        <div class="form-group">
-                            <label class="col-lg-4 control-label">
-                                Id
-                            </label>
-                            <div class="col-lg-6">
-                                <input id="nmId"
-                                       class="cts_forms form-control"
-                                       asp-for="@Model.Actual!.Id" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-4 control-label">
-                                Cantidad
-                            </label>
-                            <div class="col-lg-6">
-                                <input id="nmCantidad"
-                                       class="cts_forms form-control"
-                                       asp-for="@Model.Actual!.Cantidad" />
-                            </div>
-                        </div>
+
                         <div class="form-group">
                             <label class="col-lg-4 control-label">
                                 Formula
@@ -102,6 +81,16 @@
                                         asp-for="@Model.Actual!.Medicamento"
                                         asp-items="@(new SelectList(Model.Medicamentos, "Id", "Nombre"))">
                                 </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">
+                                Cantidad
+                            </label>
+                            <div class="col-lg-6">
+                                <input id="nmCantidad"
+                                       class="cts_forms form-control"
+                                       asp-for="@Model.Actual!.Cantidad" />
                             </div>
                         </div>
                     </div>
@@ -128,8 +117,8 @@
                                 Desea borrar la entidad?
                             </h4>
                             <h6 align="left">
-                                @Model.Actual!.Id,
-                                @Model.Actual!.Cantidad
+                                @Model.Actual!._Formula!.Codigo,
+                                @Model.Actual!._Medicamento!.Nombre
                             </h6>
                             <br />
                             <br />
@@ -148,20 +137,21 @@
             @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas ||
             Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
             {
-                <input id="flFormula"
+                <br />
+                <input id="FiltroFormulaCodigo"
+                       asp-for="Filtro._Formula.Codigo"
                        class="cts_forms form-control"
-                       asp-for="@Model.Filtro!.Formula"
-                       placeholder="Formula" />
+                       placeholder="Buscar por Código de Fórmula" />
+
                 <br />
 
                 <div class="containers_vn panel panel-default">
                     <table class="tb_data table table-striped table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>Id</th>
-                                <th>Cantidad</th>
                                 <th>Formula</th>
-                                <th>Medicamento</th>
+								<th>Medicamento</th>
+								<th>Cantidad</th>
                                 <th>Acción</th>
                             </tr>
                         </thead>
@@ -171,10 +161,9 @@
                                 foreach (var elemento in Model.Lista)
                                 {
                                     <tr>
-                                        <td>@elemento.Id</td>
-                                        <td>@elemento.Cantidad</td>
-                                        <td>@elemento._Formula?.Codigo</td>
-                                        <td>@elemento._Medicamento?.Nombre</td>
+										<td>@elemento._Formula?.Codigo</td>
+										<td>@elemento._Medicamento?.Nombre</td>
+										<td>@elemento.Cantidad</td>
                                         <td>
                                             <input type="submit"
                                                    value="Modificar"

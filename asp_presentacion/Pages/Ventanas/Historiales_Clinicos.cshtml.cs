@@ -44,6 +44,7 @@ namespace asp_presentacion.Pages.Ventanas
 
         public virtual void OnGet()
         {
+
             OnPostBtRefrescar();
         }
 
@@ -60,8 +61,8 @@ namespace asp_presentacion.Pages.Ventanas
 
                 Accion = Enumerables.Ventanas.Listas;
 
-                if (Filtro == null || Filtro.Id == 0)
-                {
+                    if (Filtro == null || string.IsNullOrWhiteSpace(Filtro.Codigo))
+                    {
                     var task = this.iPresentacion!.Listar();
                     task.Wait();
                     Lista = task.Result;

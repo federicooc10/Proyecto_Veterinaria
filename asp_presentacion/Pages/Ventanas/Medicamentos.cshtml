@@ -108,6 +108,7 @@
             @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas ||
                  Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
             {
+                <br />
                 <input id="flNombre"
                    class="cts_forms form-control"
                    asp-for="@Model.Filtro!.Nombre"

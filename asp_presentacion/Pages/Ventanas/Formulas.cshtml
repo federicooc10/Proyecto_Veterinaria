@@ -105,8 +105,8 @@
                                 Desea borrar la entidad?
                             </h4>
                             <h6 align="left">
-                                @Model.Actual!.Id,
-                                @Model.Actual!.Codigo
+                                @Model.Actual!.Codigo,
+                                @Model.Actual!._Mascota!.Nombre
                             </h6>
                             <br />
                             <br />
@@ -126,6 +126,7 @@
             @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas ||
                  Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
             {
+                <br />
                 <input id="flCodigo"
                        class="cts_forms form-control"
                        asp-for="@Model.Filtro!.Codigo"
@@ -135,9 +136,6 @@
                 <div class="containers_vn panel panel-default">
                     <table class="tb_data table table-striped table-bordered table-hover">
                         <tr>
-                            <th>
-                                Id
-                            </th>
                             <th>
                                 Codigo
                             </th>
@@ -153,9 +151,6 @@
                             @foreach (var elemento in Model.Lista)
                             {
                                 <tr>
-                                    <td>
-                                        @elemento.Id
-                                    </td>
                                     <td>
                                         @elemento.Codigo
                                     </td>

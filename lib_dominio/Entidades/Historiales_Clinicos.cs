@@ -10,7 +10,7 @@ namespace lib_dominio.Entidades
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string? Codigo { get; set; }
-        public DateTime Fecha { get; set; }
+        public DateTime Fecha { get; set; } = DateTime.Today;
         public int Cliente { get; set; }
         public int Formula { get; set; }
         public int Veterinario { get; set; }

@@ -101,13 +101,14 @@
                                 Mensaje
                             </h2>
 
-                            <h4 align="left">
-                                Desea borrar la entidad?
-                            </h4>
-                            <h6 align="left">
-                                @Model.Actual!.Id,
+                            <h3>
+                                Desea borrar a
+                            </h3>
+                            <h3>
                                 @Model.Actual!.Nombre
-                            </h6>
+                            </h3>
+                            <h3>el</h3>
+                            <h3>@Model.Actual!._Raza!.Nombre</h3> <h3>?</h3>
                             <br />
                             <br />
                             <input type="submit"
@@ -126,6 +127,7 @@
             @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas ||
                  Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
             {
+                <br />
                 <input id="flNombre"
                        class="cts_forms form-control"
                        asp-for="@Model.Filtro!.Nombre"
@@ -135,9 +137,6 @@
                 <div class="containers_vn panel panel-default">
                     <table class="tb_data table table-striped table-bordered table-hover">
                         <tr>
-                            <th>
-                                Id
-                            </th>
                             <th>
                                 Nombre
                             </th>
@@ -153,9 +152,6 @@
                             @foreach (var elemento in Model.Lista)
                             {
                                 <tr>
-                                    <td>
-                                        @elemento.Id
-                                    </td>
                                     <td>
                                         @elemento.Nombre
                                     </td>
