@@ -16,7 +16,7 @@
                  class="bt_panel_buttons">
                 <input type="submit"
                        value="Buscar"
-                       asp-page-handler="BtBuscar"
+                       asp-page-handler="BtRefrescar"
                        class="btn btn-secondary"
                        disabled="@(Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
                 <input type="submit"
@@ -128,7 +128,7 @@
             {
                 <input id="flId"
                        class="cts_forms form-control"
-                       asp-for="@Model.Filtro!.Id"
+                       asp-for="@Model.Filtro!.Codigo"
                        placeholder="Id" />
                 <br />
 

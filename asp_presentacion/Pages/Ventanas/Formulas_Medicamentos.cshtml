@@ -16,7 +16,7 @@
                  class="bt_panel_buttons">
                 <input type="submit"
                        value="Buscar"
-                       asp-page-handler="BtBuscar"
+                       asp-page-handler="BtRefrescar"
                        class="btn btn-secondary"
                        disabled="@(Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
                 <input type="submit"
@@ -148,10 +148,10 @@
             @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas ||
             Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
             {
-                <input id="flId"
+                <input id="flFormula"
                        class="cts_forms form-control"
-                       asp-for="@Model.Filtro!.Id"
-                       placeholder="Id" />
+                       asp-for="@Model.Filtro!.Formula"
+                       placeholder="Formula" />
                 <br />
 
                 <div class="containers_vn panel panel-default">
