@@ -141,3 +141,14 @@ INSERT INTO [Historiales_Clinicos] ([Codigo],[Fecha],[Cliente],[Formula],[Veteri
 	;
 
 SELECT * FROM [Historiales_Clinicos];
+
+CREATE TABLE [Auditorias] (
+	[Id] INT NOT NULL IDENTITY (1,1) PRIMARY KEY,
+	[Usuario] NVARCHAR (50),
+	[Entidad] NVARCHAR (50),
+	[Operacion] NVARCHAR (50),
+	[Datos] NVARCHAR (250),
+	[Fecha] DATETIME 
+);
+
+SELECT * FROM [Auditorias];

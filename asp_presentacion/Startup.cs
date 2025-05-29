@@ -23,6 +23,7 @@ namespace asp_presentacion
             services.AddScoped<IMedicamentosPresentacion, MedicamentosPresentacion>();
             services.AddScoped<IRazasPresentacion, RazasPresentacion>();
             services.AddScoped<IVeterinariosPresentacion, VeterinariosPresentacion>();
+            services.AddScoped<IAuditoriasPresentacion, AuditoriasPresentacion>();
 
             services.AddControllers();
             services.AddEndpointsApiExplorer();

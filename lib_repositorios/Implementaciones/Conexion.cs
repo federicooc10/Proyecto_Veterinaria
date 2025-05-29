@@ -22,6 +22,7 @@ namespace lib_repositorios.Implementaciones
         public DbSet<Medicamentos>? Medicamentos { get; set; }
         public DbSet<Razas>? Razas { get; set; }
         public DbSet<Veterinarios>? Veterinarios { get; set; }
+        public DbSet<Auditorias> Auditorias { get; set; } = null!;
 
     }
 }
