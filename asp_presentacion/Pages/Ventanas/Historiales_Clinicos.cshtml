@@ -10,7 +10,7 @@
             @Html.AntiForgeryToken()
 
             <div align="left">
-                <h3>Historiales_Clinicos</h3>
+                <h3>Historiales Clinicos</h3>
             </div>
             <div align="left"
                  class="bt_panel_buttons">
@@ -136,18 +136,18 @@
                 <div class='popup'>
                     <div class='pp_del_inner'>
                         <div style='width:95%'>
-                            <h2 align="left">
+                            <h2>
                                 Mensaje
                             </h2>
 
-                            <h4 align="left">
+                            <h4>
                                 Desea borrar los datos con el codigo:
                             </h4>
-                            <h6 align="left">
+                            <h6>
                                 @Model.Actual!.Codigo
                             </h6>
                             <h4>del cliente:</h4>
-                            <h6 align="left">
+                            <h6>
                                 @Model.Actual!._Cliente!.Documento
                             </h6>
                             <br />
@@ -171,7 +171,7 @@
                 <input id="flCodigo"
                        class="cts_forms form-control"
                        asp-for="@Model.Filtro!.Codigo"
-                       placeholder="Codigo" />
+                       placeholder="Buscar por codig de la formula" />
                 <br />
 
                 <div class="containers_vn panel panel-default">

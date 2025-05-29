@@ -101,13 +101,16 @@
                                 Mensaje
                             </h2>
 
-                            <h4 align="left">
-                                Desea borrar la entidad?
+                            <h4>
+                                Desea borrar la formula con el codigo:
                             </h4>
-                            <h6 align="left">
-                                @Model.Actual!.Codigo,
+                            <h4>
+                                @Model.Actual!.Codigo
+                            </h4>
+                            <h4>de la mascota</h4
+                            <h4>
                                 @Model.Actual!._Mascota!.Nombre
-                            </h6>
+                            </h4>
                             <br />
                             <br />
                             <input type="submit"
@@ -130,7 +133,7 @@
                 <input id="flCodigo"
                        class="cts_forms form-control"
                        asp-for="@Model.Filtro!.Codigo"
-                       placeholder="Codigo" />
+                       placeholder="Buscar por codigo de la formula" />
                 <br />
 
                 <div class="containers_vn panel panel-default">

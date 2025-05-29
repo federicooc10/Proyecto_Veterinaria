@@ -10,7 +10,7 @@
             @Html.AntiForgeryToken()
 
             <div align="left">
-                <h3>Formulas_Medicamentos</h3>
+                <h3>Formula Recetadas</h3>
             </div>
             <div align="left"
                  class="bt_panel_buttons">
@@ -114,7 +114,7 @@
                             </h2>
 
                             <h4 align="left">
-                                Desea borrar la entidad?
+                                Desea borrar la siguiente informacion?
                             </h4>
                             <h6 align="left">
                                 @Model.Actual!._Formula!.Codigo,
@@ -141,7 +141,7 @@
                 <input id="FiltroFormulaCodigo"
                        asp-for="Filtro._Formula.Codigo"
                        class="cts_forms form-control"
-                       placeholder="Buscar por Código de Fórmula" />
+                       placeholder="Buscar por codigo de la formula" />
 
                 <br />
 
