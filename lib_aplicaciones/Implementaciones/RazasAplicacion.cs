@@ -1,5 +1,6 @@
 ﻿using lib_aplicaciones.Interfaces;
 using lib_dominio.Entidades;
+using lib_dominio.Nucleo;
 using lib_repositorios.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -61,7 +62,7 @@ namespace lib_aplicaciones.Implementaciones
             {
                 Usuario = "admin",
                 Entidad = "Empleados",
-                Operacion = "Borrar",
+                Operacion = "Guardar",
                 Datos = JsonConversor.ConvertirAString(entidad!),
                 Fecha = DateTime.Now
             });
@@ -98,7 +99,7 @@ namespace lib_aplicaciones.Implementaciones
             {
                 Usuario = "admin",
                 Entidad = "Empleados",
-                Operacion = "Borrar",
+                Operacion = "Modificar",
                 Datos = JsonConversor.ConvertirAString(entidad!),
                 Fecha = DateTime.Now
             });
