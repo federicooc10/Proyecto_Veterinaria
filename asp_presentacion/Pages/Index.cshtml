@@ -1,18 +1,41 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "";
+    ViewData["Titulo"] = "Pagina Principal";
+    ViewData["MostrarLogo"] = true;
 }
+
 @if (!Model.EstaLogueado)
 {
     <div class="container"
          align="left"
-         style="width:100%">
-        <h3>
+		 style="width:100%">
+		<center>
+            <div>
+                <div style="background-color: #8ab3cf;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            display: inline-block;">
+                    <img src="img/Logo.png" width="150" height="150" alt="Logo" />
+                    <p style="color: white; margin-top: 10px; font-size: 24px;">Veterinaria blablabla</p>
+                </div>
+      </div>
+      <br />
+            <div style="background-color: #bdd1de; width: 500px; height: 300px; display: flex; 
+align-items: center;
+justify-content: center; 
+ border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            display: inline-block;">
+            <br />
+         <h3>
             Login
         </h3>
-
-        <form method="POST">
+        <br />
+        <center>
+                <form method="POST" text-align: center;>
             <div style="width:60%">
                 <div class="form-group">
                     <label class="control-label">
@@ -42,20 +65,123 @@
                        class="btn btn-default" />
             </div>
         </form>
+        </center>
+            </div>
+        </center>
+
     </div>
+
 }
 else
 {
+    <br />
     <div class="text-center">
+       
         <h1 class="display-4">
             Bienvenido
         </h1>
+        <br />
 
+        <h2>Descripcion General</h2>
+        <h3>Este proyecto tiene como objetivo desarrollar un sistema de base de datos para la gestión de la clínica veterinaria blablabla permitiendo organizar y administrar eficientemente la información de clientes,<br /> mascotas, veterinarios, historiales clínicos, medicamentos y formulas. </h3>
+        <br />
+        <div style="background-color: #8ab3cf;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            display: inline-block;">
+            <img src="img/Logo.png" width="150" height="150" alt="Logo" />
+            <p style="color: white; margin-top: 10px; font-size: 24px;">Veterinaria blablabla</p>
+        </div>
+        <br />
+        <br />
+
+        <h2>Personas Encargadas del proyecto</h2>
+        <h3>Ahora veremos algunas personas encargadas y/o involucradas en todo el proceso de este proyecto</h3>
+        <br />
+    </div>
+
+    <br />
+    <div class="text-center">
+        <h2>Desarrolladores principales</h2>
+        <br />
+        <div style="background-color: #8ab3cf;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            display: inline-block;">
+            <img src="img/Federico.jpeg" width="300" height="300" alt="Logo" />
+            <p style="color: white; margin-top: 10px; font-size: 24px;">Federico Ospina Cardona</p>
+        </div>
+        <div style="background-color: #8ab3cf;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            display: inline-block;">
+            <img src="img/Logo.png" width="150" height="150" alt="Logo" />
+            <p style="color: white; margin-top: 10px; font-size: 24px;">Valentina Cuartas Arias</p>
+        </div>
+        </div>
+        <br />
+    <div class="text-center">
+        <h2>Docente Encargado</h2>
+            <br />
+        <div style="background-color: #8ab3cf;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            display: inline-block;">
+            <img src="img/Logo.png" width="150" height="150" alt="Logo" />
+            <p style="color: white; margin-top: 10px; font-size: 24px;">Andres Felipe Albanes Gaviria</p>
+        </div>
+        </div>
+        <br />
+    <div class="text-center">
+        <h2>Colaboradores externos o indirectos</h2>
+            <br />
+        <div style="background-color: #8ab3cf;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            display: inline-block;">
+            <img src="img/Mariana.jpeg" width="140" height="230" alt="Logo" />
+            <p style="color: white; margin-top: 10px; font-size: 24px;">Mariana Vega Gutierrez</p>
+        </div>
+                <div style="background-color: #8ab3cf;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            display: inline-block;">
+            <img src="img/Diego.jpeg" width="230" height="230" alt="Logo" />
+            <p style="color: white; margin-top: 10px; font-size: 24px;">Juan Diego Perez Perez</p>
+        </div>
+                <div style="background-color: #8ab3cf;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            display: inline-block;">
+            <img src="img/Karen.jpeg" width="140" height="230" alt="Logo" />
+            <p style="color: white; margin-top: 10px; font-size: 24px;">Karen Yeleny Jimenez Lopez</p>
+        </div>
+        <div style="background-color: #8ab3cf;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            display: inline-block;">
+            <img src="img/Logo.png" width="100" height="100" alt="Logo" />
+            <p style="color: white; margin-top: 10px; font-size: 24px;">Samuel Esteban Zea Cardona</p>
+        </div>
+        </div>
+
+        <div>
+            <center>
         <form method="POST">
             <input type="submit"
-                   value="Cerrar"
+                   value="Cerrar Sesión"
                    asp-page-handler="BtClose"
                    class="btn btn-default" />
-        </form>
+			</form>
+		
+        </center>
     </div>
 }

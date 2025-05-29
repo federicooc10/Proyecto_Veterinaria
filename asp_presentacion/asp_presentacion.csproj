@@ -7,6 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\Logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\img\Birmano.jpg" />
+    <None Include="wwwroot\img\Bulldog.jpg" />
+    <None Include="wwwroot\img\Logo.png" />
+    <None Include="wwwroot\img\Poodle.jpg" />
+    <None Include="wwwroot\Logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\lib_dominio\lib_dominio.csproj" />
     <ProjectReference Include="..\lib_presentaciones\lib_presentaciones.csproj" />
   </ItemGroup>

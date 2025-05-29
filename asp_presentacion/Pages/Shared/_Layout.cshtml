@@ -3,15 +3,23 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - asp_presentacion</title>
+    <title>@ViewData["Titulo"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/asp_presentacion.styles.css" asp-append-version="true" />
+    <link rel="icon" type="image/png" href="img/Logo.png" />
+    <link rel="icon" type="image/png" href="../img/Logo.png" />
+
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div id="barra">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3"> 
             <div class="container">
+                    @if (ViewData["MostrarLogo"] as bool? == true)
+                    {
+                        <img src="~/img/Logo.png" alt="Logo" width="50" height="50" />
+                    }
                 <a class="navbar-brand" asp-area="" asp-page="/Index">Veterinaria blablabla</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -50,6 +58,7 @@
                 </div>
             </div>
         </nav>
+        </div>
     </header>
     <div class="container">
         <main role="main" class="pb-3">
@@ -59,7 +68,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2025 - asp_presentacion - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            &copy; 2025 - Veterinaria blablabla - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
     </footer>
 
