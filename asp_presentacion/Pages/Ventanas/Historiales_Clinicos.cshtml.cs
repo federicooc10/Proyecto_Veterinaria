@@ -12,6 +12,7 @@ namespace asp_presentacion.Pages.Ventanas
         private IClientesPresentacion? IClientesPresentacion = null;
         private IFormulasPresentacion? IFormulasPresentacion = null;
         private IVeterinariosPresentacion? IVeterinariosPresentacion = null;
+        public bool EstaLogueado = false;
 
         public Historiales_ClinicosModel(
             IHistoriales_ClinicosPresentacion iPresentacion,
@@ -202,6 +203,20 @@ namespace asp_presentacion.Pages.Ventanas
             {
                 if (Accion == Enumerables.Ventanas.Listas)
                     OnPostBtRefrescar();
+            }
+            catch (Exception ex)
+            {
+                LogConversor.Log(ex, ViewData!);
+            }
+        }
+
+        public void OnPostBtClose()
+        {
+            try
+            {
+                HttpContext.Session.Clear();
+                HttpContext.Response.Redirect("/");
+                EstaLogueado = false;
             }
             catch (Exception ex)
             {

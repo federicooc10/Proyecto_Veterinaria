@@ -9,6 +9,7 @@ namespace asp_presentacion.Pages.Ventanas
     public class ClientesModel : PageModel
     {
         private IClientesPresentacion? iPresentacion = null;
+        public bool EstaLogueado = false;
 
         public ClientesModel(IClientesPresentacion iPresentacion)
         {
@@ -153,6 +154,20 @@ namespace asp_presentacion.Pages.Ventanas
             {
                 if (Accion == Enumerables.Ventanas.Listas)
                     OnPostBtRefrescar();
+            }
+            catch (Exception ex)
+            {
+                LogConversor.Log(ex, ViewData!);
+            }
+        }
+
+        public void OnPostBtClose()
+        {
+            try
+            {
+                HttpContext.Session.Clear();
+                HttpContext.Response.Redirect("/");
+                EstaLogueado = false;
             }
             catch (Exception ex)
             {

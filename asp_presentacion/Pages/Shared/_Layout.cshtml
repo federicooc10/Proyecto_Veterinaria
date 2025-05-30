@@ -8,56 +8,79 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/asp_presentacion.styles.css" asp-append-version="true" />
     <link rel="icon" type="image/png" href="img/Logo.png" />
-    <link rel="icon" type="image/png" href="../img/Logo.png" />
+    <link rel="icon" type="image/png" href="../img/Logo.png" /> 
 
 </head>
 <body>
     <header>
         <div id="barra">
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3"> 
-            <div class="container">
-                    @if (ViewData["MostrarLogo"] as bool? == true)
-                    {
-                        <img src="~/img/Logo.png" alt="Logo" width="50" height="50" />
-                    }
-                <a class="navbar-brand" asp-area="" asp-page="/Index">Veterinaria blablabla</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+            @if (ViewData["MostrarNav"] as bool? != false)
+            {
+                <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3"> 
+                    <div class="container">
+                        @if (ViewData["MostrarLogo"] as bool? == true)
+                        {
+                            <img src="~/img/Logo.png" alt="Logo" width="50" height="50" />
+                        }
+                        <a class="navbar-brand" >Veterinaria Peluditos</a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Ventanas/Clientes">Clientes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Ventanas/Formulas">Formulas</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Ventanas/Formulas_Medicamentos">Formulas Recetadas</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Ventanas/Historiales_Clinicos">Historiales Clinicos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Ventanas/Mascotas">Mascotas</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Ventanas/Medicamentos">Medicamentos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Ventanas/Razas">Razas</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Ventanas/Veterinarios">Veterinarios</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                            <ul class="navbar-nav flex-grow-1">
+                                <li class="nav-item" id="prueba">
+                                    <a class="nav-link text-white" id asp-area="" asp-page="/Index">Home</a>
+                                </li>
+                                <li class="nav-item" id="prueba">
+                                    <a class="nav-link text-white" asp-area="" asp-page="/Ventanas/Clientes">Clientes</a>
+                                </li>
+                                <li class="nav-item" id="prueba">
+                                    <a class="nav-link text-white" asp-area="" asp-page="/Ventanas/Formulas">Formulas</a>
+                                </li>
+                                <li class="nav-item" id="prueba">
+                                    <a class="nav-link text-white" asp-area="" asp-page="/Ventanas/Formulas_Medicamentos">Formulas Recetadas</a>
+                                </li>
+                                <li class="nav-item" id="prueba">
+                                    <a class="nav-link text-white" asp-area="" asp-page="/Ventanas/Historiales_Clinicos">Historiales Clinicos</a>
+                                </li>
+                                <li class="nav-item" id="prueba">
+                                    <a class="nav-link text-white" asp-area="" asp-page="/Ventanas/Mascotas">Mascotas</a>
+                                </li>
+                                <li class="nav-item" id="prueba">
+                                    <a class="nav-link text-white" asp-area="" asp-page="/Ventanas/Medicamentos">Medicamentos</a>
+                                </li>
+                                <li class="nav-item" id="prueba">
+                                    <a class="nav-link text-white" asp-area="" asp-page="/Ventanas/Razas">Razas</a>
+                                </li>
+                                <li class="nav-item" id="prueba">
+                                    <a class="nav-link text-white" asp-area="" asp-page="/Ventanas/Veterinarios">Veterinarios</a>
+                                </li>
+                            </ul>
+                        </div>
+
+
+
+                        @if (ViewData["MostrarCerrarSesion"] as bool? != false)
+                        {
+                            <div id="prueba2">
+                                <center>
+                                    <form method="POST">
+                                        <input type="submit"
+                                        value="Cerrar Sesión"
+                                        asp-page-handler="BtClose"
+                                               class="btn mi-boton" style="color: white;"  />
+                                    </form>
+
+                                </center>
+                            </div>
+
+                        }
+
+                    </div>
+                </nav>
+
+            }
         </div>
     </header>
     <div class="container">
@@ -68,7 +91,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2025 - Veterinaria blablabla - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            <h6>&copy; 2025 - Veterinaria Peluditos </h6>
         </div>
     </footer>
 

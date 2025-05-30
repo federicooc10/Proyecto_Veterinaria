@@ -10,6 +10,7 @@ namespace asp_presentacion.Pages.Ventanas
     {
         private IFormulasPresentacion? iPresentacion = null;
         private IMascotasPresentacion? IMascotasPresentacion = null;
+        public bool EstaLogueado = false;
 
         public FormulasModel(IFormulasPresentacion iPresentacion,
             IMascotasPresentacion IMascotasPresentacion)
@@ -173,6 +174,20 @@ namespace asp_presentacion.Pages.Ventanas
             {
                 if (Accion == Enumerables.Ventanas.Listas)
                     OnPostBtRefrescar();
+            }
+            catch (Exception ex)
+            {
+                LogConversor.Log(ex, ViewData!);
+            }
+        }
+
+        public void OnPostBtClose()
+        {
+            try
+            {
+                HttpContext.Session.Clear();
+                HttpContext.Response.Redirect("/");
+                EstaLogueado = false;
             }
             catch (Exception ex)
             {

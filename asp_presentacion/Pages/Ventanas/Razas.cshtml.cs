@@ -9,7 +9,7 @@ namespace asp_presentacion.Pages.Ventanas
     public class RazasModel : PageModel
     {
         private IRazasPresentacion? iPresentacion = null;
-
+        public bool EstaLogueado = false;
         public RazasModel(IRazasPresentacion iPresentacion)
         {
             try
@@ -153,6 +153,20 @@ namespace asp_presentacion.Pages.Ventanas
             {
                 if (Accion == Enumerables.Ventanas.Listas)
                     OnPostBtRefrescar();
+            }
+            catch (Exception ex)
+            {
+                LogConversor.Log(ex, ViewData!);
+            }
+        }
+
+        public void OnPostBtClose()
+        {
+            try
+            {
+                HttpContext.Session.Clear();
+                HttpContext.Response.Redirect("/");
+                EstaLogueado = false;
             }
             catch (Exception ex)
             {

@@ -7,6 +7,11 @@
 
 @if (!Model.EstaLogueado)
 {
+   ViewData["MostrarCerrarSesion"] = false;
+   ViewData["MostrarNav"] = false;
+   <br />
+   <br />
+   <br />
     <div class="container"
          align="left"
 		 style="width:100%">
@@ -18,7 +23,7 @@
             text-align: center;
             display: inline-block;">
                     <img src="img/Logo.png" width="150" height="150" alt="Logo" />
-                    <p style="color: white; margin-top: 10px; font-size: 24px;">Veterinaria blablabla</p>
+                    <p style="color: white; margin-top: 10px; font-size: 24px;">Veterinaria Peluditos</p>
                 </div>
       </div>
       <br />
@@ -35,36 +40,22 @@ justify-content: center;
         </h3>
         <br />
         <center>
-                <form method="POST" text-align: center;>
-            <div style="width:60%">
-                <div class="form-group">
-                    <label class="control-label">
-                        Usuario:
-                    </label>
-                    <input onchange="keyUp(this)"
-                           asp-for="@Model.Email"
-                           class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label class="control-label">
-                        Contrasena:
-                    </label>
-                    <input type="password"
-                           onchange="keyUp(this)"
-                           asp-for="@Model.Contrasena"
-                           class="form-control" />
-                </div>
+                    <form method="POST">
+                        <div style="width:60%">
+                            <div class="form-group">
+                                <label class="control-label">Usuario:</label>
+                                <input asp-for="@Model.Email" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Contrasena:</label>
+                                <input type="password" asp-for="@Model.Contrasena" class="form-control" />
+                            </div>
 
-                <input type="submit"
-                       value="Limpiar"
-                       asp-page-handler="BtClean"
-                       class="btn btn-default" />
-                <input type="submit"
-                       value="Entrar"
-                       asp-page-handler="BtEnter"
-                       class="btn btn-default" />
-            </div>
-        </form>
+                            <input type="button" value="Limpiar" onclick="this.form.reset();" class="btn btn-default" />
+                            <input type="submit" value="Entrar" asp-page-handler="BtEnter" class="btn btn-default" />
+                        </div>
+                    </form>
+
         </center>
             </div>
         </center>
@@ -83,7 +74,7 @@ else
         <br />
 
         <h2>Descripcion General</h2>
-        <h3>Este proyecto tiene como objetivo desarrollar un sistema de base de datos para la gestión de la clínica veterinaria blablabla permitiendo organizar y administrar eficientemente la información de clientes,<br /> mascotas, veterinarios, historiales clínicos, medicamentos y formulas. </h3>
+        <h3>Este proyecto tiene como objetivo desarrollar un sistema de base de datos para la gestión de la Clínica Veterinaria Peluditos, permitiendo organizar y administrar eficientemente la información de clientes, mascotas, veterinarios, historiales clínicos, medicamentos y formulas. </h3>
         <br />
         <div style="background-color: #8ab3cf;
             border-radius: 20px;
@@ -91,7 +82,7 @@ else
             text-align: center;
             display: inline-block;">
             <img src="img/Logo.png" width="150" height="150" alt="Logo" />
-            <p style="color: white; margin-top: 10px; font-size: 24px;">Veterinaria blablabla</p>
+            <p style="color: white; margin-top: 10px; font-size: 24px;">Veterinaria Peluditos</p>
         </div>
         <br />
         <br />
@@ -118,7 +109,7 @@ else
             padding: 20px;
             text-align: center;
             display: inline-block;">
-            <img src="img/Logo.png" width="150" height="150" alt="Logo" />
+            <img src="img/Valentina.jpeg" width="270" height="300" alt="Logo" />
             <p style="color: white; margin-top: 10px; font-size: 24px;">Valentina Cuartas Arias</p>
         </div>
         </div>
@@ -131,7 +122,7 @@ else
             padding: 20px;
             text-align: center;
             display: inline-block;">
-            <img src="img/Logo.png" width="150" height="150" alt="Logo" />
+            <img src="img/Andres.jpeg" width="250" height="300" alt="Logo" />
             <p style="color: white; margin-top: 10px; font-size: 24px;">Andres Felipe Albanes Gaviria</p>
         </div>
         </div>
@@ -161,27 +152,15 @@ else
             text-align: center;
             display: inline-block;">
             <img src="img/Karen.jpeg" width="140" height="230" alt="Logo" />
-            <p style="color: white; margin-top: 10px; font-size: 24px;">Karen Yeleny Jimenez Lopez</p>
+            <p style="color: white; margin-top: 10px; font-size: 24px;">Karen Jimenez Lopez</p>
         </div>
         <div style="background-color: #8ab3cf;
             border-radius: 20px;
             padding: 20px;
             text-align: center;
             display: inline-block;">
-            <img src="img/Logo.png" width="100" height="100" alt="Logo" />
+            <img src="img/Samuel.jpeg" width="160" height="230" alt="Logo" />
             <p style="color: white; margin-top: 10px; font-size: 24px;">Samuel Esteban Zea Cardona</p>
         </div>
         </div>
-
-        <div>
-            <center>
-        <form method="POST">
-            <input type="submit"
-                   value="Cerrar Sesión"
-                   asp-page-handler="BtClose"
-                   class="btn btn-default" />
-			</form>
-		
-        </center>
-    </div>
 }

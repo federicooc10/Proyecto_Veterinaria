@@ -11,6 +11,7 @@ namespace asp_presentacion.Pages.Ventanas
         private IFormulas_MedicamentosPresentacion? iPresentacion = null;
         private IFormulasPresentacion? IFormulasPresentacion = null;
         private IMedicamentosPresentacion? IMedicamentosPresentacion = null;
+        public bool EstaLogueado = false;
 
         public Formulas_MedicamentosModel(
             IFormulas_MedicamentosPresentacion iPresentacion,
@@ -203,6 +204,20 @@ namespace asp_presentacion.Pages.Ventanas
             {
                 if (Accion == Enumerables.Ventanas.Listas)
                     OnPostBtRefrescar();
+            }
+            catch (Exception ex)
+            {
+                LogConversor.Log(ex, ViewData!);
+            }
+        }
+
+        public void OnPostBtClose()
+        {
+            try
+            {
+                HttpContext.Session.Clear();
+                HttpContext.Response.Redirect("/");
+                EstaLogueado = false;
             }
             catch (Exception ex)
             {
