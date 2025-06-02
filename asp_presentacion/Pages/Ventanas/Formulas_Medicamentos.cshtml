@@ -3,54 +3,55 @@
 @{
     ViewData["Titulo"] = "Formulas_Medicamentos";
     ViewData["MostrarLogo"] = true;
+    var rol = HttpContext.Session.GetString("Rol");
 }
 <center>
     <div>
         <form method="POST"
-              enctype="multipart/form-data">
+        enctype="multipart/form-data">
             @Html.AntiForgeryToken()
 
             <div align="left">
                 <h3>Formula Recetadas</h3>
             </div>
             <div align="left"
-                 class="bt_panel_buttons">
+            class="bt_panel_buttons">
                 <input type="submit"
-                       value="Buscar"
-                       asp-page-handler="BtRefrescar"
-                       class="btn btn-secondary"
-                       disabled="@(Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
+                value="Buscar"
+                asp-page-handler="BtRefrescar"
+                class="btn btn-secondary"
+                disabled="@(Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
                 <input type="submit"
-                       value="Nuevo"
-                       asp-page-handler="BtNuevo"
-                       class="btn btn-secondary"
-                       disabled="@(Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
+                value="Nuevo"
+                asp-page-handler="BtNuevo"
+                class="btn btn-secondary"
+                disabled="@(Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
                 <input type="submit"
-                       value="Guardar"
-                       asp-page-handler="BtGuardar"
-                       class="btn btn-secondary"
-                       disabled="@(Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
+                value="Guardar"
+                asp-page-handler="BtGuardar"
+                class="btn btn-secondary"
+                disabled="@(Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
                 <input type="submit"
-                       value="Cancelar"
-                       asp-page-handler="BtCancelar"
-                       class="btn btn-secondary"
-                       disabled="@(Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
+                value="Cancelar"
+                asp-page-handler="BtCancelar"
+                class="btn btn-secondary"
+                disabled="@(Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
             </div>
 
             @if (Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas ||
-                 Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
+                Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
             {
                 <input type="hidden"
-                       asp-for="@Model.Actual!.Id" />
+                asp-for="@Model.Actual!.Id" />
             }
             @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
             {
                 <input type="hidden"
-                       asp-for="@Model.Actual!.Cantidad" />
+                asp-for="@Model.Actual!.Cantidad" />
                 <input type="hidden"
-                       asp-for="@Model.Actual!.Formula" />
-                  <input type="hidden"
-                       asp-for="@Model.Actual!.Medicamento" />
+                asp-for="@Model.Actual!.Formula" />
+                <input type="hidden"
+                asp-for="@Model.Actual!.Medicamento" />
             }
 
             @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Editar)
@@ -66,9 +67,9 @@
                             </label>
                             <div class="col-lg-6">
                                 <select id="nmFormula"
-                                    class="form-control"
-                                        asp-for="@Model.Actual!.Formula"
-                                    asp-items="@(new SelectList(Model.Formulas, "Id", "Codigo"))">
+                                class="form-control"
+                                asp-for="@Model.Actual!.Formula"
+                                asp-items="@(new SelectList(Model.Formulas, "Id", "Codigo"))">
                                 </select>
                             </div>
                         </div>
@@ -78,9 +79,9 @@
                             </label>
                             <div class="col-lg-6">
                                 <select id="nmMedicamento"
-                                        class="form-control"
-                                        asp-for="@Model.Actual!.Medicamento"
-                                        asp-items="@(new SelectList(Model.Medicamentos, "Id", "Nombre"))">
+                                class="form-control"
+                                asp-for="@Model.Actual!.Medicamento"
+                                asp-items="@(new SelectList(Model.Medicamentos, "Id", "Nombre"))">
                                 </select>
                             </div>
                         </div>
@@ -90,8 +91,8 @@
                             </label>
                             <div class="col-lg-6">
                                 <input id="nmCantidad"
-                                       class="cts_forms form-control"
-                                       asp-for="@Model.Actual!.Cantidad" />
+                                class="cts_forms form-control"
+                                asp-for="@Model.Actual!.Cantidad" />
                             </div>
                         </div>
                     </div>
@@ -100,7 +101,7 @@
             @if (ViewData.ContainsKey("Mensaje"))
             {
                 <input type="hidden"
-                       asp-for="@Model.Accion" />
+                asp-for="@Model.Accion" />
                 @await Html.PartialAsync("../Emergentes/Mensajes.cshtml")
                 ;
             }
@@ -124,13 +125,13 @@
                             <br />
                             <br />
                             <input type="submit"
-                                   value="Borrar"
-                                   asp-page-handler="BtBorrar"
-                                   class="btn btn-secondary" />
+                            value="Borrar"
+                            asp-page-handler="BtBorrar"
+                            class="btn btn-secondary" />
                             <input type="submit"
-                                   value="Cerrar"
-                                   asp-page-handler="BtCancelar"
-                                   class="btn btn-secondary" />
+                            value="Cerrar"
+                            asp-page-handler="BtCancelar"
+                            class="btn btn-secondary" />
                         </div>
                     </div>
                 </div>
@@ -140,9 +141,9 @@
             {
                 <br />
                 <input id="FiltroFormulaCodigo"
-                       asp-for="Filtro._Formula.Codigo"
-                       class="cts_forms form-control"
-                       placeholder="Buscar por codigo de la formula" />
+                asp-for="Filtro._Formula.Codigo"
+                class="cts_forms form-control"
+                placeholder="Buscar por codigo de la formula" />
 
                 <br />
 
@@ -151,9 +152,12 @@
                         <thead>
                             <tr>
                                 <th>Formula</th>
-								<th>Medicamento</th>
-								<th>Cantidad</th>
-                                <th>Acción</th>
+                                <th>Medicamento</th>
+                                <th>Cantidad</th>
+                                @if (rol != "Cliente")
+                                {
+                                    <th>Acción</th>
+                                }
                             </tr>
                         </thead>
                         <tbody>
@@ -165,6 +169,7 @@
 										<td>@elemento._Formula?.Codigo</td>
 										<td>@elemento._Medicamento?.Nombre</td>
 										<td>@elemento.Cantidad</td>
+                                        @if (rol != "Cliente"){
                                         <td>
                                             <input type="submit"
                                                    value="Modificar"
@@ -177,6 +182,7 @@
                                                    class="btn btn-danger"
                                                    asp-route-data="@elemento.Id" />
                                         </td>
+                                        }
                                     </tr>
                                 }
                             }

@@ -2,55 +2,56 @@
 @model asp_presentacion.Pages.Ventanas.FormulasModel
 @{
     ViewData["Titulo"] = "Formulas";
-     ViewData["MostrarLogo"] = true;
+    ViewData["MostrarLogo"] = true;
+        var rol = HttpContext.Session.GetString("Rol");
 }
 <center>
     <div>
         <form method="POST"
-              enctype="multipart/form-data">
+        enctype="multipart/form-data">
             @Html.AntiForgeryToken()
 
             <div align="left">
                 <h3>Formulas</h3>
             </div>
             <div align="left"
-                 class="bt_panel_buttons">
+            class="bt_panel_buttons">
                 <input type="submit"
-                       value="Buscar"
-                       asp-page-handler="BtRefrescar"
-                       class="btn btn-secondary"
-                       disabled="@(Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
+                value="Buscar"
+                asp-page-handler="BtRefrescar"
+                class="btn btn-secondary"
+                disabled="@(Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
                 <input type="submit"
-                       value="Nuevo"
-                       asp-page-handler="BtNuevo"
-                       class="btn btn-secondary"
-                       disabled="@(Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
+                value="Nuevo"
+                asp-page-handler="BtNuevo"
+                class="btn btn-secondary"
+                disabled="@(Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
                 <input type="submit"
-                       value="Guardar"
-                       asp-page-handler="BtGuardar"
-                       class="btn btn-secondary"
-                       disabled="@(Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
+                value="Guardar"
+                asp-page-handler="BtGuardar"
+                class="btn btn-secondary"
+                disabled="@(Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
                 <input type="submit"
-                       value="Cancelar"
-                       asp-page-handler="BtCancelar"
-                       class="btn btn-secondary"
-                       disabled="@(Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
+                value="Cancelar"
+                asp-page-handler="BtCancelar"
+                class="btn btn-secondary"
+                disabled="@(Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
             </div>
 
             @if (Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas ||
-                 Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
+                Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
             {
                 <input type="hidden"
-                       asp-for="@Model.Actual!.Id" />
+                asp-for="@Model.Actual!.Id" />
             }
             @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
             {
                 <input type="hidden"
-                       asp-for="@Model.Actual!.Id" />
+                asp-for="@Model.Actual!.Id" />
                 <input type="hidden"
-                       asp-for="@Model.Actual!.Codigo" />
+                asp-for="@Model.Actual!.Codigo" />
                 <input type="hidden"
-                       asp-for="@Model.Actual!.Mascota" />
+                asp-for="@Model.Actual!.Mascota" />
             }
 
             @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Editar)
@@ -65,8 +66,8 @@
                             </label>
                             <div class="col-lg-6">
                                 <input id="nmCodigo"
-                                       class="cts_forms form-control"
-                                       asp-for="@Model.Actual!.Codigo" />
+                                class="cts_forms form-control"
+                                asp-for="@Model.Actual!.Codigo" />
                             </div>
                         </div>
                         <div class="form-group">
@@ -75,9 +76,9 @@
                             </label>
                             <div class="col-lg-6">
                                 <select id="nmMascota"
-                                    class="form-control"
-                                        asp-for="@Model.Actual!.Mascota"
-                                    asp-items="@(new SelectList(Model.Mascotas, "Id", "Nombre"))">
+                                class="form-control"
+                                asp-for="@Model.Actual!.Mascota"
+                                asp-items="@(new SelectList(Model.Mascotas, "Id", "Nombre"))">
                                 </select>
                             </div>
                         </div>
@@ -88,7 +89,7 @@
             @if (ViewData.ContainsKey("Mensaje"))
             {
                 <input type="hidden"
-                       asp-for="@Model.Accion" />
+                asp-for="@Model.Accion" />
                 @await Html.PartialAsync("../Emergentes/Mensajes.cshtml")
                 ;
             }
@@ -115,26 +116,26 @@
                             <br />
                             <br />
                             <input type="submit"
-                                   value="Borrar"
-                                   asp-page-handler="BtBorrar"
-                                   class="btn btn-secondary" />
+                            value="Borrar"
+                            asp-page-handler="BtBorrar"
+                            class="btn btn-secondary" />
                             <input type="submit"
-                                   value="Cerrar"
-                                   asp-page-handler="BtCancelar"
-                                   class="btn btn-secondary" />
+                            value="Cerrar"
+                            asp-page-handler="BtCancelar"
+                            class="btn btn-secondary" />
                         </div>
                     </div>
                 </div>
             }
 
             @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas ||
-                 Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
+                Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
             {
                 <br />
                 <input id="flCodigo"
-                       class="cts_forms form-control"
-                       asp-for="@Model.Filtro!.Codigo"
-                       placeholder="Buscar por codigo de la formula" />
+                class="cts_forms form-control"
+                asp-for="@Model.Filtro!.Codigo"
+                placeholder="Buscar por codigo de la formula" />
                 <br />
 
                 <div class="containers_vn panel panel-default">
@@ -146,9 +147,11 @@
                             <th class="cl_hidden">
                                 Mascota
                             </th>
+                                  @if (rol != "Cliente"){
                             <th>
                                 Accion
                             </th>
+                                  }
                         </tr>
                         @if (Model != null && Model.Lista != null)
                         {
@@ -161,8 +164,10 @@
                                     <td class="cl_hidden">
                                         @elemento._Mascota!.Nombre
                                     </td>
-                                    <td>
-                                        <input type="submit"
+                                    @if (rol != "Cliente")
+                                    {
+                                        <td>
+                                            <input type="submit"
                                                value="Modificar"
                                                asp-page-handler="BtModificar"
                                                class="btn btn-warning"
@@ -173,6 +178,7 @@
                                                class="btn btn-danger"
                                                asp-route-data="@elemento.Id" />
                                     </td>
+                                    }
                                 </tr>
                             }
                         }

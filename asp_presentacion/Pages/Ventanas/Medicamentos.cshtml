@@ -3,51 +3,52 @@
 @{
     ViewData["Titulo"] = "Medicamentos";
     ViewData["MostrarLogo"] = true;
+    var rol = HttpContext.Session.GetString("Rol");
 
 }
 <center>
     <div>
         <form method="POST"
-            enctype="multipart/form-data">
+        enctype="multipart/form-data">
             @Html.AntiForgeryToken()
 
             <div align="left">
                 <h3>Medicamentos</h3>
             </div>
             <div align="left"
-                 class="bt_panel_buttons">
+            class="bt_panel_buttons">
                 <input type="submit"
-                       value="Buscar"
-                       asp-page-handler="BtRefrescar"
-                       class="btn btn-secondary"
-                       disabled="@(Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
+                value="Buscar"
+                asp-page-handler="BtRefrescar"
+                class="btn btn-secondary"
+                disabled="@(Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
                 <input type="submit"
-                       value="Nuevo"
-                       asp-page-handler="BtNuevo"
-                       class="btn btn-secondary"
-                       disabled="@(Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
+                value="Nuevo"
+                asp-page-handler="BtNuevo"
+                class="btn btn-secondary"
+                disabled="@(Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
                 <input type="submit"
-                       value="Guardar"
-                       asp-page-handler="BtGuardar"
-                       class="btn btn-secondary"
-                       disabled="@(Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
+                value="Guardar"
+                asp-page-handler="BtGuardar"
+                class="btn btn-secondary"
+                disabled="@(Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
                 <input type="submit"
-                       value="Cancelar"
-                       asp-page-handler="BtCancelar"
-                       class="btn btn-secondary"
-                       disabled="@(Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
+                value="Cancelar"
+                asp-page-handler="BtCancelar"
+                class="btn btn-secondary"
+                disabled="@(Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
             </div>
 
             @if (Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas ||
-                 Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
+                Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
             {
                 <input type="hidden"
-                    asp-for="@Model.Actual!.Id" />
+                asp-for="@Model.Actual!.Id" />
             }
             @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
             {
                 <input type="hidden"
-                   asp-for="@Model.Actual!.Nombre" />
+                asp-for="@Model.Actual!.Nombre" />
             }
 
             @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Editar)
@@ -62,8 +63,8 @@
                             </label>
                             <div class="col-lg-6">
                                 <input id="nmNombre"
-                                   class="cts_forms form-control"
-                                   asp-for="@Model.Actual!.Nombre" />
+                                class="cts_forms form-control"
+                                asp-for="@Model.Actual!.Nombre" />
                             </div>
                         </div>
                     </div>
@@ -73,8 +74,8 @@
             @if (ViewData.ContainsKey("Mensaje"))
             {
                 <input type="hidden"
-                   asp-for="@Model.Accion" />
-                    @await Html.PartialAsync("../Emergentes/Mensajes.cshtml");
+                asp-for="@Model.Accion" />
+                @await Html.PartialAsync("../Emergentes/Mensajes.cshtml");
             }
 
             @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
@@ -95,26 +96,26 @@
                             <br />
                             <br />
                             <input type="submit"
-                               value="Borrar"
-                               asp-page-handler="BtBorrar"
-                               class="btn btn-secondary" />
+                            value="Borrar"
+                            asp-page-handler="BtBorrar"
+                            class="btn btn-secondary" />
                             <input type="submit"
-                               value="Cerrar"
-                               asp-page-handler="BtCancelar"
-                               class="btn btn-secondary" />
+                            value="Cerrar"
+                            asp-page-handler="BtCancelar"
+                            class="btn btn-secondary" />
                         </div>
                     </div>
                 </div>
             }
 
             @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas ||
-                 Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
+                Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
             {
                 <br />
                 <input id="flNombre"
-                   class="cts_forms form-control"
-                   asp-for="@Model.Filtro!.Nombre"
-                   placeholder="Buscar por nombre del medicamento" />
+                class="cts_forms form-control"
+                asp-for="@Model.Filtro!.Nombre"
+                placeholder="Buscar por nombre del medicamento" />
                 <br />
 
                 <div class="containers_vn panel panel-default">
@@ -123,9 +124,11 @@
                             <th>
                                 Nombre
                             </th>
+                                  @if (rol != "Cliente"){
                             <th>
                                 Accion
                             </th>
+                                  }
                         </tr>
                         @if (Model != null && Model.Lista != null)
                         {
@@ -135,18 +138,21 @@
                                     <td>
                                         @elemento.Nombre
                                     </td>
-                                    <td>
-                                        <input type="submit"
-                                           value="Modificar"
-                                           asp-page-handler="BtModificar"
-                                           class="btn btn-warning"
-                                           asp-route-data="@elemento.Id" />
-                                        <input type="submit"
-                                           value="Borrar"
-                                           asp-page-handler="BtBorrarVal"
-                                           class="btn btn-danger"
-                                           asp-route-data="@elemento.Id" />
-                                    </td>
+                                    @if (rol != "Cliente")
+                                    {
+                                        <td>
+                                            <input type="submit"
+                                            value="Modificar"
+                                            asp-page-handler="BtModificar"
+                                            class="btn btn-warning"
+                                            asp-route-data="@elemento.Id" />
+                                            <input type="submit"
+                                            value="Borrar"
+                                            asp-page-handler="BtBorrarVal"
+                                            class="btn btn-danger"
+                                            asp-route-data="@elemento.Id" />
+                                        </td>
+                                    }
                                 </tr>
                             }
                         }
