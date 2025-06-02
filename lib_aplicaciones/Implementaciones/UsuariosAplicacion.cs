@@ -34,15 +34,7 @@ namespace lib_aplicaciones.Implementaciones
 
             this.IConexion!.Usuarios!.Remove(entidad);
             this.IConexion.SaveChanges();
-            this.IAuditoriasAplicacion!.Configurar(this.IConexion.StringConexion!);
-            this.IAuditoriasAplicacion!.Guardar(new Auditorias
-            {
-                Usuario = "admin",
-                Entidad = "Usuarios",
-                Operacion = "Borrar",
-                Datos = JsonConversor.ConvertirAString(entidad!),
-                Fecha = DateTime.Now
-            });
+
             return entidad;
         }
 
@@ -58,15 +50,7 @@ namespace lib_aplicaciones.Implementaciones
 
             this.IConexion!.Usuarios!.Add(entidad);
             this.IConexion.SaveChanges();
-            this.IAuditoriasAplicacion!.Configurar(this.IConexion.StringConexion!);
-            this.IAuditoriasAplicacion!.Guardar(new Auditorias
-            {
-                Usuario = "admin",
-                Entidad = "Usuarios",
-                Operacion = "Guardar",
-                Datos = JsonConversor.ConvertirAString(entidad!),
-                Fecha = DateTime.Now
-            });
+
             return entidad;
         }
 
@@ -99,15 +83,7 @@ namespace lib_aplicaciones.Implementaciones
             var entry = this.IConexion!.Entry<Usuarios>(entidad);
             entry.State = EntityState.Modified;
             this.IConexion.SaveChanges();
-            this.IAuditoriasAplicacion!.Configurar(this.IConexion.StringConexion!);
-            this.IAuditoriasAplicacion!.Guardar(new Auditorias
-            {
-                Usuario = "admin",
-                Entidad = "Usuarios",
-                Operacion = "Modificar",
-                Datos = JsonConversor.ConvertirAString(entidad!),
-                Fecha = DateTime.Now
-            });
+
             return entidad;
         }
     }

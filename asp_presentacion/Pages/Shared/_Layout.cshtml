@@ -22,7 +22,7 @@
                         {
                             <img src="~/img/Logo.png" alt="Logo" width="50" height="50" />
                         }
-                        <a class="navbar-brand" >Veterinaria Peluditos</a>
+                        <h6>Veterinaria <br/> Peluditos</h6>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
@@ -31,9 +31,9 @@
                             @{
                                 var rol = Context.Session.GetString("Rol");
                             }
-							<ul class="navbar-nav flex-grow-1">
+                            <ul class="navbar-nav flex-grow-1">
 
-								<li class="nav-item" id="prueba"><a class="nav-link text-white" asp-area="" asp-page="/Index">Home</a></li>
+                                <li class="nav-item" id="prueba"><a class="nav-link text-white" asp-area="" asp-page="/Index">Home</a></li>
 
                                 @if (rol == "Cliente")
                                 {
@@ -41,7 +41,7 @@
                                     <li class="nav-item" id="prueba"><a class="nav-link text-white" asp-area="" asp-page="/Ventanas/Formulas">Formulas</a></li>
                                     <li class="nav-item" id="prueba"><a class="nav-link text-white" asp-area="" asp-page="/Ventanas/Formulas_Medicamentos">Formulas Recetadas</a></li>
                                     <li class="nav-item" id="prueba"><a class="nav-link text-white" asp-area="" asp-page="/Ventanas/Mascotas">Mascotas</a></li>
-                                    <li class="nav-item" id="prueba"><a class="nav-link text-white" asp-area="" asp-page="/Ventanas/Veterinarios">Veterinarios</a></li> @*todas solo ver*@
+                                    <li class="nav-item" id="prueba"><a class="nav-link text-white" asp-area="" asp-page="/Ventanas/Veterinarios">Veterinarios</a></li>
                                 }
 
                                 @if (rol == "Veterinario")
@@ -53,7 +53,7 @@
                                     <li class="nav-item" id="prueba"><a class="nav-link text-white" asp-area="" asp-page="/Ventanas/Mascotas">Mascotas</a></li>
                                     <li class="nav-item" id="prueba"><a class="nav-link text-white" asp-area="" asp-page="/Ventanas/Medicamentos">Medicamentos</a></li>
                                     <li class="nav-item" id="prueba"><a class="nav-link text-white" asp-area="" asp-page="/Ventanas/Razas">Razas</a></li>
-                                    <li class="nav-item" id="prueba"><a class="nav-link text-white" asp-area="" asp-page="/Ventanas/Veterinarios">Veterinarios</a></li> @* solo ver *@
+                                    <li class="nav-item" id="prueba"><a class="nav-link text-white" asp-area="" asp-page="/Ventanas/Veterinarios">Veterinarios</a></li>
                                 }
 
                                 @if (rol == "Administrador")
@@ -66,6 +66,7 @@
 									<li class="nav-item" id="prueba"><a class="nav-link text-white" asp-area="" asp-page="/Ventanas/Medicamentos">Medicamentos</a></li>
 									<li class="nav-item" id="prueba"><a class="nav-link text-white" asp-area="" asp-page="/Ventanas/Mascotas">Mascotas</a></li>
 									<li class="nav-item" id="prueba"><a class="nav-link text-white" asp-area="" asp-page="/Ventanas/Razas">Razas</a></li>
+									<li class="nav-item" id="prueba"><a class="nav-link text-white" asp-area="" asp-page="/Ventanas/Auditorias">Auditorias</a></li>
                                 }
 
                             </ul>

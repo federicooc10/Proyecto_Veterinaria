@@ -2,20 +2,23 @@
 using lib_dominio.Entidades;
 using lib_dominio.Nucleo;
 using lib_repositorios.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace lib_aplicaciones.Implementaciones
+
+
+
 {
     public class ClientesAplicacion : IClientesAplicacion
     {
         private IConexion? IConexion = null;
         private IAuditoriasAplicacion? IAuditoriasAplicacion = null;
-
         public ClientesAplicacion(IConexion iConexion, IAuditoriasAplicacion iAuditoriasAplicacion)
         {
             this.IConexion = iConexion;
             this.IAuditoriasAplicacion = iAuditoriasAplicacion;
-        }
+    }
         
         public void Configurar(string StringConexion)
         {
@@ -37,10 +40,9 @@ namespace lib_aplicaciones.Implementaciones
             this.IAuditoriasAplicacion!.Configurar(this.IConexion.StringConexion!);
             this.IAuditoriasAplicacion!.Guardar(new Auditorias
             {
-                Usuario = "admin",
-                Entidad = "Empleados",
+               Usuario = "Veterinario",
+                Entidad = "Clientes",
                 Operacion = "Borrar",
-                Datos = JsonConversor.ConvertirAString(entidad!),
                 Fecha = DateTime.Now
             });
             return entidad;
@@ -61,10 +63,9 @@ namespace lib_aplicaciones.Implementaciones
             this.IAuditoriasAplicacion!.Configurar(this.IConexion.StringConexion!);
             this.IAuditoriasAplicacion!.Guardar(new Auditorias
             {
-                Usuario = "admin",
-                Entidad = "Empleados",
+                Usuario = "Veterinario",
+                Entidad = "Clientes",
                 Operacion = "Guardar",
-                Datos = JsonConversor.ConvertirAString(entidad!),
                 Fecha = DateTime.Now
             });
             return entidad;
@@ -98,10 +99,9 @@ namespace lib_aplicaciones.Implementaciones
             this.IAuditoriasAplicacion!.Configurar(this.IConexion.StringConexion!);
             this.IAuditoriasAplicacion!.Guardar(new Auditorias
             {
-                Usuario = "admin",
-                Entidad = "Empleados",
+                Usuario = "Veterinario",
+                Entidad = "Clientes",
                 Operacion = "Modificar",
-                Datos = JsonConversor.ConvertirAString(entidad!),
                 Fecha = DateTime.Now
             });
             return entidad;

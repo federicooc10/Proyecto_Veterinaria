@@ -38,6 +38,7 @@ namespace asp_servicios
             services.AddScoped<IRolesAplicacion, RolesAplicacion>();
             services.AddScoped<IUsuariosAplicacion, UsuariosAplicacion>();
 
+
             // Controladores
             services.AddScoped<TokenController, TokenController>();
 

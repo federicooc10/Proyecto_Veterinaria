@@ -37,10 +37,9 @@ namespace lib_aplicaciones.Implementaciones
             this.IAuditoriasAplicacion!.Configurar(this.IConexion.StringConexion!);
             this.IAuditoriasAplicacion!.Guardar(new Auditorias
             {
-                Usuario = "admin",
-                Entidad = "Empleados",
+                Usuario = "Veterinario",
+                Entidad = "Historiales_Clinicos",
                 Operacion = "Borrar",
-                Datos = JsonConversor.ConvertirAString(entidad!),
                 Fecha = DateTime.Now
             });
             return entidad;
@@ -61,10 +60,9 @@ namespace lib_aplicaciones.Implementaciones
             this.IAuditoriasAplicacion!.Configurar(this.IConexion.StringConexion!);
             this.IAuditoriasAplicacion!.Guardar(new Auditorias
             {
-                Usuario = "admin",
-                Entidad = "Empleados",
+                Usuario = "Veterinario",
+                Entidad = "Historiales_Clinicos",
                 Operacion = "Guardar",
-                Datos = JsonConversor.ConvertirAString(entidad!),
                 Fecha = DateTime.Now
             });
             return entidad;
@@ -84,7 +82,6 @@ namespace lib_aplicaciones.Implementaciones
         {
             return this.IConexion!.Historiales_Clinicos!
                 .Where(x => x.Codigo!.Contains(entidad!.Codigo!))
-             //   .Include(x => x._Mascota)
                 .Include(x => x._Cliente)
                 .Include(x => x._Formula)
                 .Include(x => x._Veterinario)
@@ -107,10 +104,9 @@ namespace lib_aplicaciones.Implementaciones
             this.IAuditoriasAplicacion!.Configurar(this.IConexion.StringConexion!);
             this.IAuditoriasAplicacion!.Guardar(new Auditorias
             {
-                Usuario = "admin",
-                Entidad = "Empleados",
+                Usuario = "Veterinario",
+                Entidad = "Historiales_Clinicos",
                 Operacion = "Modificar",
-                Datos = JsonConversor.ConvertirAString(entidad!),
                 Fecha = DateTime.Now
             });
             return entidad;

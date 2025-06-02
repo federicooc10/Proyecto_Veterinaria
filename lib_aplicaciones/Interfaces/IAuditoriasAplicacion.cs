@@ -5,7 +5,7 @@ namespace lib_aplicaciones.Interfaces
     public interface IAuditoriasAplicacion
     {
         void Configurar(string StringConexion);
-        List<Auditorias> PorUsuario(Auditorias? entidad);
+        List<Auditorias> PorOperacion(Auditorias? entidad);
         List<Auditorias> Listar();
         Auditorias? Guardar(Auditorias? entidad);
         Auditorias? Modificar(Auditorias? entidad);

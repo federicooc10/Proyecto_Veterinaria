@@ -11,7 +11,9 @@
     <None Include="wwwroot\img\Bulldog.jpg" />
     <None Include="wwwroot\img\Logo.png" />
     <None Include="wwwroot\img\Poodle.jpg" />
+	<PackageReference Include="Microsoft.AspNetCore.Http" Version="2.3.0" />
   </ItemGroup>
+
 
   <ItemGroup>
     <ProjectReference Include="..\lib_dominio\lib_dominio.csproj" />

@@ -37,10 +37,9 @@ namespace lib_aplicaciones.Implementaciones
             this.IAuditoriasAplicacion!.Configurar(this.IConexion.StringConexion!);
             this.IAuditoriasAplicacion!.Guardar(new Auditorias
             {
-                Usuario = "admin",
-                Entidad = "Empleados",
+                Usuario = "Veterinario",
+                Entidad = "Formulas_Medicamentos",
                 Operacion = "Borrar",
-                Datos = JsonConversor.ConvertirAString(entidad!),
                 Fecha = DateTime.Now
             });
             return entidad;
@@ -61,10 +60,9 @@ namespace lib_aplicaciones.Implementaciones
             this.IAuditoriasAplicacion!.Configurar(this.IConexion.StringConexion!);
             this.IAuditoriasAplicacion!.Guardar(new Auditorias
             {
-                Usuario = "admin",
-                Entidad = "Empleados",
+                Usuario = "Veterinario",
+                Entidad = "Formulas_Medicamentos",
                 Operacion = "Guardar",
-                Datos = JsonConversor.ConvertirAString(entidad!),
                 Fecha = DateTime.Now
             });
             return entidad;
@@ -104,10 +102,9 @@ namespace lib_aplicaciones.Implementaciones
             this.IAuditoriasAplicacion!.Configurar(this.IConexion.StringConexion!);
             this.IAuditoriasAplicacion!.Guardar(new Auditorias
             {
-                Usuario = "admin",
-                Entidad = "Empleados",
+                Usuario = "Veterinario",
+                Entidad = "Formulas_Medicamentos",
                 Operacion = "Modificar",
-                Datos = JsonConversor.ConvertirAString(entidad!),
                 Fecha = DateTime.Now
             });
             return entidad;

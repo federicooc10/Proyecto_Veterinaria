@@ -11,6 +11,7 @@ namespace lib_aplicaciones.Implementaciones
         private IConexion? IConexion = null;
         private IAuditoriasAplicacion? IAuditoriasAplicacion = null;
 
+
         public MedicamentosAplicacion(IConexion iConexion, IAuditoriasAplicacion iAuditoriasAplicacion)
         {
             this.IConexion = iConexion;
@@ -37,10 +38,9 @@ namespace lib_aplicaciones.Implementaciones
             this.IAuditoriasAplicacion!.Configurar(this.IConexion.StringConexion!);
             this.IAuditoriasAplicacion!.Guardar(new Auditorias
             {
-                Usuario = "admin",
-                Entidad = "Empleados",
+                Usuario = "Veterinario",
+                Entidad = "Medicamentos",
                 Operacion = "Borrar",
-                Datos = JsonConversor.ConvertirAString(entidad!),
                 Fecha = DateTime.Now
             });
             return entidad;
@@ -61,10 +61,9 @@ namespace lib_aplicaciones.Implementaciones
             this.IAuditoriasAplicacion!.Configurar(this.IConexion.StringConexion!);
             this.IAuditoriasAplicacion!.Guardar(new Auditorias
             {
-                Usuario = "admin",
-                Entidad = "Empleados",
+                Usuario = "Veterinario",
+                Entidad = "Medicamentos",
                 Operacion = "Guardar",
-                Datos = JsonConversor.ConvertirAString(entidad!),
                 Fecha = DateTime.Now
             });
             return entidad;
@@ -98,10 +97,9 @@ namespace lib_aplicaciones.Implementaciones
             this.IAuditoriasAplicacion!.Configurar(this.IConexion.StringConexion!);
             this.IAuditoriasAplicacion!.Guardar(new Auditorias
             {
-                Usuario = "admin",
-                Entidad = "Empleados",
+                Usuario = "Veterinario",
+                Entidad = "Medicamentos",
                 Operacion = "Modificar",
-                Datos = JsonConversor.ConvertirAString(entidad!),
                 Fecha = DateTime.Now
             });
             return entidad;

@@ -82,6 +82,9 @@ namespace asp_presentacion.Pages
                     return;
                 }
 
+                string? usuarioLogueado = HttpContext.Session.GetString("Usuario");
+
+
                 // Si todo es correcto, guardar sesión
                 ViewData["Logged"] = true;
                 HttpContext.Session.SetString("Usuario", usuario.Id.ToString());

@@ -54,10 +54,10 @@ namespace lib_aplicaciones.Implementaciones
             return this.IConexion!.Auditorias!.Take(20).ToList();
         }
 
-        public List<Auditorias> PorUsuario(Auditorias? entidad)
+        public List<Auditorias> PorOperacion(Auditorias? entidad)
         {
             return this.IConexion!.Auditorias!
-                .Where(x => x.Usuario!.Contains(entidad!.Usuario!))
+                .Where(x => x.Operacion!.Contains(entidad!.Operacion!))
                 .ToList();
         }
 
