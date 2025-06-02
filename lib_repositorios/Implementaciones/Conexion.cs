@@ -23,6 +23,8 @@ namespace lib_repositorios.Implementaciones
         public DbSet<Razas>? Razas { get; set; }
         public DbSet<Veterinarios>? Veterinarios { get; set; }
         public DbSet<Auditorias> Auditorias { get; set; } = null!;
+        public DbSet<Roles> Roles { get; set; }
+        public DbSet<Usuarios> Usuarios { get; set; }
 
     }
 }

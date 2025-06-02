@@ -24,6 +24,8 @@ namespace asp_presentacion
             services.AddScoped<IRazasPresentacion, RazasPresentacion>();
             services.AddScoped<IVeterinariosPresentacion, VeterinariosPresentacion>();
             services.AddScoped<IAuditoriasPresentacion, AuditoriasPresentacion>();
+            services.AddScoped<IRolesPresentacion, RolesPresentacion>();
+            services.AddScoped<IUsuariosPresentacion, UsuariosPresentacion>();
 
             services.AddControllers();
             services.AddEndpointsApiExplorer();

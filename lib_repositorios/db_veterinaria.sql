@@ -152,3 +152,34 @@ CREATE TABLE [Auditorias] (
 );
 
 SELECT * FROM [Auditorias];
+
+CREATE TABLE [Roles] (
+	[Id] INT NOT NULL IDENTITY (1,1) PRIMARY KEY,
+	[Nombre] NVARCHAR (50),
+	[Descripcion] NVARCHAR (70)
+);
+
+
+INSERT INTO [Roles] ([Nombre],[Descripcion]) VALUES 
+	('Cliente','Comprador'),
+	('Veterinario','Empleado'),
+	('Administrador','Dueño');
+
+SELECT * FROM Roles;
+
+CREATE TABLE [Usuarios] (
+	[Id] INT NOT NULL IDENTITY (1,1) PRIMARY KEY,
+	[Email] NVARCHAR (50) UNIQUE NOT NULL,
+	[Contraseña] NVARCHAR (100),
+	[Rol] INT NOT NULL,
+	FOREIGN KEY ([Rol]) REFERENCES [Roles]([Id]) 
+		
+);
+
+INSERT INTO [Usuarios]([Email],[Contraseña],[Rol])
+VALUES 
+	('fede@gmail.com','0000',1),
+	('ospi@gmail.com','1111',2),
+	('cardo@gmail.com','2222',3);
+
+	SELECT * FROM Usuarios;
