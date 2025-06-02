@@ -129,11 +129,20 @@
                     </div>
                 </div>
             }
+
             @if (ViewData.ContainsKey("Mensaje"))
             {
                 <input type="hidden"
                 asp-for="@Model.Accion" />
                 @await Html.PartialAsync("../Emergentes/Mensajes.cshtml")
+                ;
+            }
+
+            @if (ViewData.ContainsKey("Mensaje2"))
+            {
+                <input type="hidden"
+                       asp-for="@Model.Accion" />
+                @await Html.PartialAsync("../Emergentes/Mensajes2.cshtml")
                 ;
             }
 

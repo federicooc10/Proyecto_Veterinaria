@@ -49,6 +49,8 @@ namespace asp_presentacion.Pages
             {
                 Email = string.Empty;
                 Contrasena = string.Empty;
+
+                ModelState.Clear();
             }
             catch (Exception ex)
             {
@@ -61,7 +63,6 @@ namespace asp_presentacion.Pages
         {
             try
             {
-
                 if (string.IsNullOrEmpty(Email) && string.IsNullOrEmpty(Contrasena))
                 {
                     OnPostBtClean();
@@ -75,17 +76,15 @@ namespace asp_presentacion.Pages
                 task.Wait();
                 var usuario = task.Result.FirstOrDefault();
 
-
                 if (usuario == null || usuario.Contraseña != Contrasena)
                 {
-                    OnPostBtClean();
+                    Contrasena = string.Empty;
+                    ModelState.Remove(nameof(Contrasena));
+
+                    ModelState.AddModelError(string.Empty, "Usuario o contraseña incorrectos.");
                     return;
                 }
 
-                string? usuarioLogueado = HttpContext.Session.GetString("Usuario");
-
-
-                // Si todo es correcto, guardar sesión
                 ViewData["Logged"] = true;
                 HttpContext.Session.SetString("Usuario", usuario.Id.ToString());
                 HttpContext.Session.SetString("Rol", usuario._Rol!.Nombre!);
@@ -98,6 +97,7 @@ namespace asp_presentacion.Pages
                 LogConversor.Log(ex, ViewData!);
             }
         }
+
 
         // Acción que se ejecuta al presionar el botón "Cerrar sesión"
         public void OnPostBtClose()

@@ -45,7 +45,7 @@ justify-content: center;
                         <div style="width:60%">
                             <div class="form-group">
                                 <label class="control-label">
-                                    Usuario:
+                                    Email:
                                 </label>
                                 <input onchange="keyUp(this)"
                                        asp-for="@Model.Email"
@@ -60,6 +60,11 @@ justify-content: center;
                                        asp-for="@Model.Contrasena"
                                        class="form-control" />
                             </div>
+
+
+                            <button type="submit"
+                                    asp-page-handler="BtEnter"
+                                    style="display:none;"></button>
 
                             <input type="submit"
                                    value="Limpiar"
